@@ -76,10 +76,10 @@ for (var i = 0, len = donut_data.length; i < len; i++) {
 
 var chart_main = c3.generate({
     bindto: '#main_chart',
-    size: {
-        height: 240,
-        width: 480
-    },
+//    size: {
+//        height: 240,
+//        width: 480
+//    },
     data: {
         x: 'x',
 //        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
@@ -131,7 +131,7 @@ function toggle(id) {
     chart_donut.toggle(id);
 }
 
-d3.select('.container').insert('div', '#legend').attr('class', 'legend').selectAll('span')
+d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selectAll('span')
     .data(types_of_shapes)
     .enter().append('span')
     .attr('data-id', function (id) { return id; })

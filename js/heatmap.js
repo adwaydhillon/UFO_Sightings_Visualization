@@ -72,10 +72,7 @@ d3.csv("data/data.csv",
 //        updateData_LineChart(window.datesHashmapArray);
         
 
-        console.log(defaultSightingsAggArray);
-
         d3.json("data/states.json", function(json) {
-          console.log(json);
           heatmap = d3.scale.linear()
             .domain([0,d3.max(json.features, function(d) { return Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1); })])
             .interpolate(d3.interpolateRgb)
@@ -93,11 +90,8 @@ d3.csv("data/data.csv",
               .on("click.zoom", click)
               .on('click.select', select)
               .on('mouseover', function() {
-                  console.log('Mousing over ' + this.id + ' and isSelected is ' + this.isSelected);
-                  //console.log(this.style.fill);
                   curStateFill = this.style.fill;
                   this.style.fill = col_white;
-                  //console.log(this.isSelected);
               })
               .on('mouseout', function() {
                   if (mode == 'mouse') {
@@ -105,12 +99,9 @@ d3.csv("data/data.csv",
                       console.log(1);
                   } else {
                       if (this.isSelected == 'true') {
-                          console.log('Moused out of ' + this.id + ' and isSelected is ' + this.isSelected);
                           this.style.fill = col_white;
-                          //console.log(2);
                       } else {
                           this.style.fill = curStateFill;
-                          console.log('Moused out of ' + this.id + ' and isSelected is ' + this.isSelected);
                       }
                   }
               });
@@ -127,8 +118,6 @@ d3.csv("data/data.csv",
         });
 
 });
-//console.log(sighting_dict);
-
 
 // FOR USE WITH COORDINATES
 var statesCoord = [];
@@ -140,8 +129,6 @@ d3.csv("data/data.csv",
             lng : +d.lng,
         };
     }, function(data){
-    console.log("why not here");
-    console.log([data]);
         data.forEach(function(currentVal){
             if (!statesCoord[currentVal.State]){
                 statesCoord[currentVal.State] = [[currentVal.lng,currentVal.lat]];
@@ -183,15 +170,10 @@ function select(d) {
 var pushableData = [];
 function combineData() {
     pushableData = [];
-    console.log("These are the now selected states: ");
-    console.log(selectedStates);
     for (var i = 0; i < selectedStates.length; i++) {
         var newState = selectedStates[i];
         var newSighting = window.statesHashmap[newState.toUpperCase()];
-        console.log(newState);
-        console.log(newSighting);
         var newItem = {State: newState, Sightings: newSighting}
-        console.log(newItem);
         pushableData.push(newItem)
     }
     console.log(pushableData);
@@ -220,9 +202,29 @@ function deselectStates() {
 //    updateData_LineChart(newData);
 //}
 
+function getNavBar_html(data) {
+    
+    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>'
+    
+    var html_str = video + "<p><font face=\"Marker Felt\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Witness Account: </strong>" + data.Summary + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "</font></p>";
+    return html_str;
+}
+
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+function openNav(data) {
+    document.getElementById("mySidenav").style.width = "500px";
+    var html_content = getNavBar_html(data);
+    console.log("string");
+    console.log(html_content);
+    $('#mySidenav').append(html_content);
+    //    var div = document.getElementById("mySidenav");
+//    div.style.width = "400px";
+//    div.insertAdjacentHTML("work");
+//    var content = document.createTextNode("<YOUR_CONTENT> <br> 2?");
+//    div.appendChild(content);
+//    var html_content = getNavBar_html(data);
+//    mySidenav.innerHTML = "hey";
+    //div.innerHTML = div.innerHTML + 'Extra stuff';
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
@@ -234,39 +236,42 @@ function closeNav() {
     document.body.style.backgroundColor = "white";
 }
 
+function roundDecimal(coordinate) {
+    var old_str = parseFloat(coordinate).toString();
+    arr = old_str.split(".");
+    var new_str = arr[0] + "." + arr[1].substring(0,2);
+    return Number(new_str);
+}
+
 function get_info_on_sighting(sighting_coordinates) {
-    d3.csv("data/data.csv",
+    //console.log(sighting_coordinates);
+    d3.csv("data/dataCSV.csv",
     function(d){
-//        var temp_str = d3.timeParse("Date / Time");
-//        var index = temp_str.indexOf(" ");  // Gets the first index where a space occours
-//        
-//        var date = temp_str.substr(0, index); // Gets the first part
-//        var time = temp_str.substr(index + 1);  // Gets the text part
-           console.log("coord in the if");
-            console.log(sighting_coordinates[0]);
-            console.log(sighting_coordinates[1]);     
-        if(d.lat == sighting_coordinates[0] && d.lng == sighting_coordinates[1]) {
-            
-            clicked_sighting = {
-//            Date: date,
-//            Time: time,
-            City: d.City,
-            State : d.State,
-            Country: d.Country,
-            Shape: d.Shape,
-            Summary: d.Summary,        
-            lat : +d.lat,
-            lng : +d.lng
-                } 
-            }
-        console.log("adway look here!");
-                    console.log(clicked_sighting);
-        });
-        return{
-        
+//            clicked_lat = roundDecimal(sighting_coordinates[1]);
+//            clicked_lng = roundDecimal(sighting_coordinates[0]);
+//            for (var i = 0, len = d.length; i < len; i++) {
+//                temp_lat = roundDecimal(d[i].lat);
+//                temp_lng = roundDecimal(d[i].lng);
+//                if (clicked_lat == temp_lat && clicked_lng == temp_lng) {
+//                    console.log("ITS WORKING!!");
+//                }
+//            }
+        return {
+                Date: "1/14/2016",
+                Time: "6:45:00 PM",
+                Country : "USA",
+                City : "495 Maryland Hwy",
+                State : "MD",
+                Shape : "Triangle",
+                Summary : "Triangle UFO over Maryland Highway 495N.",
+                Lat : "39.4262079",
+                Lng : "-79.3349455"
+        };
     }, function(data){
-        
-    };
+            console.log("ejbhb");
+            console.log(data[0]);
+        openNav(data[0]);
+    });
 }
 
 function click(d) {
@@ -303,9 +308,7 @@ function click(d) {
                         return d === centered;
                     });
 
-                console.log(d.properties.abbr.toUpperCase());
         // SHOW COORDINATES ON ZOOM IN
-                console.log(statesCoord[d.properties.abbr.toUpperCase()]);
                 g.selectAll("circle")
                 .data(statesCoord[d.properties.abbr.toUpperCase()]).enter()
                 .append("circle")
@@ -315,12 +318,10 @@ function click(d) {
                 .attr("r", "5px")
                 .attr("fill",col_red)
                 .on('click', function(d) {
-                    console.log("clicked!!");
-                    get_info_on_sighting(projection(d));
+                    get_info_on_sighting(d);
                     openNav();
                 })
                 .on('mouseover',function(d){
-                    console.log("moused over circle")
                     d3.select("body").append("svg")
                         .attr('class',"info")
                         .style('z-index', '2')

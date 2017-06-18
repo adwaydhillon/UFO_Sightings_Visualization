@@ -1,7 +1,6 @@
 
 
 window.addEventListener('message', function(e) {
-    console.log("in main");
     var opts = e.data.opts,
         data = e.data.data;
     return main(opts, data);
@@ -17,7 +16,6 @@ var defaults = {
 };
 
 function main(o, data) {
-    console.log("in th emain");
   var root,
       opts = $.extend(true, {}, defaults, o),
       formatNumber = d3.format(opts.format),
@@ -81,7 +79,6 @@ function main(o, data) {
   initialize(root);
   accumulate(root);
   layout(root);
-  console.log(root);
   display(root);
 
   if (window.parent !== window) {
@@ -275,7 +272,6 @@ function read_csv() {
 }
 
 if (window.location.hash === "") {
-    console.log("in th ewindow thin");
     d3.json("data/countries.json", function(err, res) {
         if (!err) {
             var data = d3.nest().key(function(d) { return d.region; }).key(function(d) { return d.subregion; }).entries(res);

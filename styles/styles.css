@@ -1,0 +1,18 @@
+#container{
+    width: 100%;
+    overflow: hidden; /* contain floated elements */
+    background: #ccc
+}
+#legend {
+    float: left; 
+    width: 20%;
+}
+#main_chart { 
+    float: left;
+    width: 50%;
+}
+#donut_chart{
+    float: left;
+    width: 30%;
+}
+

@@ -502,27 +502,27 @@ var updateHeatMap = function() {
 
 //Add text to buttons.
 
-var mouseButtonText = buttonGroup.append('text')
-    .style('width', '32px')
-    .style('height', '32px')
-    .attr('text-anchor', 'middle')
-    .attr('alignment-baseline', 'central')
-    .style('pointer-events', 'none')
-    .attr('fill', col_gray)
-    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-    .attr('x', '' + (0.5 * HMbuttonDim) + 'px')
-    .text('M');
-
-var selectStatesButtonText = buttonGroup.append('text')
-    .style('width', '32px')
-    .style('height', '32px')
-    .attr('text-anchor', 'middle')
-    .attr('alignment-baseline', 'central')
-    .style('pointer-events', 'none')
-    .attr('fill', col_gray)
-    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-    .attr('x', '' + (1.5 * HMbuttonDim) + 'px')
-    .text('S');
+//var mouseButtonText = buttonGroup.append('text')
+//    .style('width', '32px')
+//    .style('height', '32px')
+//    .attr('text-anchor', 'middle')
+//    .attr('alignment-baseline', 'central')
+//    .style('pointer-events', 'none')
+//    .attr('fill', col_gray)
+//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
+//    .attr('x', '' + (0.5 * HMbuttonDim) + 'px')
+//    .text('M');
+//
+//var selectStatesButtonText = buttonGroup.append('text')
+//    .style('width', '32px')
+//    .style('height', '32px')
+//    .attr('text-anchor', 'middle')
+//    .attr('alignment-baseline', 'central')
+//    .style('pointer-events', 'none')
+//    .attr('fill', col_gray)
+//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
+//    .attr('x', '' + (1.5 * HMbuttonDim) + 'px')
+//    .text('S');
 
 //var sendToBarChartButtonText = buttonGroup.append('text')
 //    .style('width', '32px')
@@ -549,115 +549,115 @@ var selectStatesButtonText = buttonGroup.append('text')
 
 //Select State Button Actions
 // mouse over select state button button
-selectStatesButton.on('mouseover', function() {
-    if (selectStatesButton.attr('class') == 'selected') {
-
-    } else {
-        selectStatesButton.attr('opacity', 1);
-    }
-    console.log('Hovering over Select States Button');
-});
-
-selectStatesButton.on('mouseout', function() {
-    if (selectStatesButton.attr('class') == 'selected') {
-
-    } else {
-        selectStatesButton.attr('opacity', 0.5)
-    }
-});
-
-selectStatesButton.on('click', function() {
-    deselectStates();
-    if (selectStatesButton.attr('class') == 'selectable') {
-
-        mode = 'select'
-
-        selectStatesButton.attr('class', 'selected');
-        selectStatesButton.attr('fill', col_white);
-        selectStatesButton.attr('opacity', 1);
-
-        mouseButton.attr('class', 'selectable');
-        mouseButton.attr('opacity', 0.5);
-        mouseButton.attr('fill', col_orange);
-
-        //CODE THE CARTOGRAM HERE
-        console.log('ready to render cartogram');
-        runCarto();
-
-        sendToBarChart.attr('class', 'unselectable');
-        sendToBarChart.attr('opacity', 1);
-        sendToBarChart.attr('fill', col_black);
-
-        sendToLineChart.attr('class', 'unselectable');
-        sendToLineChart.attr('opacity', 1);
-        sendToLineChart.attr('fill', col_black);
-
-    } else if (selectStatesButton.attr('class') == 'selected') {
-
-        mode = 'mouse'
-
-        sendToBarChart.attr('class', 'unselectable');
-        sendToBarChart.attr('opacity', 1);
-        sendToBarChart.attr('fill', col_black);
-
-        sendToLineChart.attr('class', 'unselectable');
-        sendToLineChart.attr('opacity', 1);
-        sendToLineChart.attr('fill', col_black);
-
-
-        selectStatesButton.attr('class', 'selectable');
-        selectStatesButton.attr('fill', col_orange);
-
-        mouseButton.attr('class', 'selected');
-        mouseButton.attr('opacity', 1);
-        mouseButton.attr('fill', col_white);
-
-    }
-});
-
-//Mouse Button Actions
-// mouse over select state button button
-mouseButton.on('mouseover', function() {
-    if (mouseButton.attr('class') == 'selected') {
-
-    } else {
-        mouseButton.attr('opacity', 1);
-    }
-    console.log('Hovering over Mouse Button');
-});
-
-mouseButton.on('mouseout', function() {
-    if (mouseButton.attr('class') == 'selected') {
-
-    } else {
-        mouseButton.attr('opacity', 0.5)
-    }
-});
-
-mouseButton.on('click', function() {
-    if (mouseButton.attr('class') == 'selectable') {
-
-        mode = 'mouse';
-        deselectStates();
-
-        mouseButton.attr('class', 'selected');
-        mouseButton.attr('fill', col_white);
-        mouseButton.attr('opacity', 1);
-
-        selectStatesButton.attr('class', 'selectable');
-        selectStatesButton.attr('opacity', 0.5);
-        selectStatesButton.attr('fill', col_orange);
-
-        sendToBarChart.attr('class', 'unselectable');
-        sendToBarChart.attr('fill', col_black);
-        sendToBarChart.attr('opacity', 1);
-
-        sendToLineChart.attr('class', 'unselectable');
-        sendToLineChart.attr('fill', col_black);
-        sendToLineChart.attr('opacity', 1);
-
-    }
-});
+//selectStatesButton.on('mouseover', function() {
+//    if (selectStatesButton.attr('class') == 'selected') {
+//
+//    } else {
+//        selectStatesButton.attr('opacity', 1);
+//    }
+//    console.log('Hovering over Select States Button');
+//});
+//
+//selectStatesButton.on('mouseout', function() {
+//    if (selectStatesButton.attr('class') == 'selected') {
+//
+//    } else {
+//        selectStatesButton.attr('opacity', 0.5)
+//    }
+//});
+//
+//selectStatesButton.on('click', function() {
+//    deselectStates();
+//    if (selectStatesButton.attr('class') == 'selectable') {
+//
+//        mode = 'select'
+//
+//        selectStatesButton.attr('class', 'selected');
+//        selectStatesButton.attr('fill', col_white);
+//        selectStatesButton.attr('opacity', 1);
+//
+//        mouseButton.attr('class', 'selectable');
+//        mouseButton.attr('opacity', 0.5);
+//        mouseButton.attr('fill', col_orange);
+//
+//        //CODE THE CARTOGRAM HERE
+//        console.log('ready to render cartogram');
+//        runCarto();
+//
+//        sendToBarChart.attr('class', 'unselectable');
+//        sendToBarChart.attr('opacity', 1);
+//        sendToBarChart.attr('fill', col_black);
+//
+//        sendToLineChart.attr('class', 'unselectable');
+//        sendToLineChart.attr('opacity', 1);
+//        sendToLineChart.attr('fill', col_black);
+//
+//    } else if (selectStatesButton.attr('class') == 'selected') {
+//
+//        mode = 'mouse'
+//
+//        sendToBarChart.attr('class', 'unselectable');
+//        sendToBarChart.attr('opacity', 1);
+//        sendToBarChart.attr('fill', col_black);
+//
+//        sendToLineChart.attr('class', 'unselectable');
+//        sendToLineChart.attr('opacity', 1);
+//        sendToLineChart.attr('fill', col_black);
+//
+//
+//        selectStatesButton.attr('class', 'selectable');
+//        selectStatesButton.attr('fill', col_orange);
+//
+//        mouseButton.attr('class', 'selected');
+//        mouseButton.attr('opacity', 1);
+//        mouseButton.attr('fill', col_white);
+//
+//    }
+//});
+//
+////Mouse Button Actions
+//// mouse over select state button button
+//mouseButton.on('mouseover', function() {
+//    if (mouseButton.attr('class') == 'selected') {
+//
+//    } else {
+//        mouseButton.attr('opacity', 1);
+//    }
+//    console.log('Hovering over Mouse Button');
+//});
+//
+//mouseButton.on('mouseout', function() {
+//    if (mouseButton.attr('class') == 'selected') {
+//
+//    } else {
+//        mouseButton.attr('opacity', 0.5)
+//    }
+//});
+//
+//mouseButton.on('click', function() {
+//    if (mouseButton.attr('class') == 'selectable') {
+//
+//        mode = 'mouse';
+//        deselectStates();
+//
+//        mouseButton.attr('class', 'selected');
+//        mouseButton.attr('fill', col_white);
+//        mouseButton.attr('opacity', 1);
+//
+//        selectStatesButton.attr('class', 'selectable');
+//        selectStatesButton.attr('opacity', 0.5);
+//        selectStatesButton.attr('fill', col_orange);
+//
+//        sendToBarChart.attr('class', 'unselectable');
+//        sendToBarChart.attr('fill', col_black);
+//        sendToBarChart.attr('opacity', 1);
+//
+//        sendToLineChart.attr('class', 'unselectable');
+//        sendToLineChart.attr('fill', col_black);
+//        sendToLineChart.attr('opacity', 1);
+//
+//    }
+//});
 
 ////Send to bar chart button actions
 //

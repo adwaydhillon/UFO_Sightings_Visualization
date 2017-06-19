@@ -11,8 +11,11 @@ var defaults = {
     rootname: "TOP",
     format: ",d",
     title: "",
-    width: 560,
-    height: 350
+    width: $("#treemap").width(),
+    height: $("#treemap").height()
+//        centered;
+//    width: 560,
+//    height: 350
 };
 
 function main(o, data) {
@@ -25,7 +28,7 @@ function main(o, data) {
 
   $('#treemap').width(opts.width).height(opts.height);
   var width = opts.width - margin.left - margin.right,
-      height = opts.height - margin.top - margin.bottom - theight,
+      height = opts.height - margin.top - margin.bottom,
       transitioning;
   
   var color = d3.scale.category20c();
@@ -49,7 +52,7 @@ function main(o, data) {
       .attr("height", height + margin.bottom + margin.top)
       .style("margin-left", -margin.left + "px")
       .style("margin.right", -margin.right + "px")
-    .append("g")
+      .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
       .style("shape-rendering", "crispEdges");
   
@@ -128,7 +131,7 @@ function main(o, data) {
     grandparent
         .datum(d.parent)
         .on("click", transition)
-      .select("text")
+        .select("text")
         .text(name(d));
 
     var g1 = svg.insert("g", ".grandparent")
@@ -137,7 +140,7 @@ function main(o, data) {
 
     var g = g1.selectAll("g")
         .data(d._children)
-      .enter().append("g");
+        .enter().append("g");
 
     g.filter(function(d) { return d._children; })
         .classed("children", true)
@@ -145,12 +148,12 @@ function main(o, data) {
 
     var children = g.selectAll(".child")
         .data(function(d) { return d._children || [d]; })
-      .enter().append("g");
+        .enter().append("g");
 
     children.append("rect")
         .attr("class", "child")
         .call(rect)
-      .append("title")
+        .append("title")
         .text(function(d) { return d.key + " (" + formatNumber(d.value) + ")"; });
     children.append("text")
         .attr("class", "ctext")
@@ -256,7 +259,7 @@ function read_csv() {
             "key": d.Shape,
             "region": d.Country,
             "subregion": d.State,
-            "value": 25500100
+            "value": 25500100 //dummy value. Will get overwritten once the python script is run
         };
     }, function(data) {
       $.ajax({

@@ -13,9 +13,13 @@ var globalLowerDate, globalUpperDate;
 var globalAggSighting;
 var clicked_sighting = {};
 
-var width = 650,
-    height = 263,
-    centered;
+//var width = 650,
+//    height = 263,
+//    centered;
+
+    var width = $("#heatmap").width(),
+        height = $("#heatmap").height(),
+        centered;
 
 var projection = d3.geo.albersUsa()
     .scale(width)

@@ -202,11 +202,32 @@ function deselectStates() {
 //    updateData_LineChart(newData);
 //}
 
+function search_youtube(str_keywords) {
+    url = 'https://www.googleapis.com/youtube/v3/search';
+    var params = {
+        part: 'snippet',
+        key: 'AIzaSyDAKDaBy_JDwcScSHqDQimOOLjdPImLanc',
+        q: searchTerm
+    };
+  
+    $.getJSON(url, params, function (searchTerm) {
+        var html = "";
+    var entries = results.items;
+    
+    $.each(entries, function (index, value) {
+        var title = value.snippet.title;
+        var thumbnail = value.snippet.thumbnails.default.url;
+        html += '<p>' + title + '</p>';
+        html += '<img src="' + thumbnail + '">';
+        }); 
+    });
+}
+
 function getNavBar_html(data) {
     
     var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>'
     
-    var html_str = video + "<p><font face=\"Marker Felt\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Witness Account: </strong>" + data.Summary + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "</font></p>";
+    var html_str = video + "<p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
     return html_str;
 }
 

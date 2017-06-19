@@ -12,7 +12,7 @@ var defaults = {
     format: ",d",
     title: "",
     width: 560,
-    height: 650
+    height: 350
 };
 
 function main(o, data) {

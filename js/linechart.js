@@ -1,115 +1,35 @@
-//function get_csv_data() {
-//    d3.csv("data/dataCSV.csv",
-//    function(d) {
-//        var date_arr = d.Date_Time.split(" ")[0];
-//        date_arr = date_arr.split("/");
-//        
-//        for (var i = 0, len = date_arr.length; i < len; i++) {
-//            if (date_arr[i].length < 2) {
-//                date_arr[i] = "0" + date_arr[i];
-//            } 
-//        }
-//        
-//        date_arr[2] = "20" + date_arr[2];
-//        var str_date = date_arr[0] + "-" + date_arr[1] + "-" + date_arr[2];
-//        return{
-//            Shape: d.Shape,
-//            Date: str_date
-//        };
-//    }, function(data) {
-//        var temp = {};
-//        for (var i = 0, len = data.length; i < len; i++) {
-//            var key = data[i].Shape + "_" + data[i].Date;
-//            if (key in temp) {
-//                temp[key] = temp[key] + 1;
-//            } else {
-//                temp[key] = 1;
-//            }
-//        }
-//        chart_data = [];
-//        var dateSet = new Set();
-//        var shapeSet = new Set();
-//        for (shape_date in temp) {
-//            shapeSet.add(shape_date.split("_")[0]);
-//            dateSet.add(shape_date.split("_")[1]);
-//        }
-//        var column_table = [];
-//        dates_arr = dateSet.values();
-//        column_table.push(dates_arr);
-//        for (shape in shapeSet.values()) {
-//            console.log("hege");
-//            column_table.push([""].push(shape));
-//        }
-//        console.log("look here");
-//        console.log(temp);
-//        for (var i = 0, len = temp.length; i < len; i++) {
-//            
-//        }
-//    });
-//}
-
-//get_csv_data();
-
-var first_column =  ['x', '2013-01-21', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'];
-var subs_columns = [
-            ['data1', 30, 200, 100, 400, 150, 250],
-            ['data2', 130, 340, 200, 500, 250, 350],
-            ['data3', 400, 500, 450, 700, 600, 500]
-        ];
 
 
-var full_data = subs_columns.slice();
-full_data.unshift(first_column);
-var donut_data = [];
-for (var i = 0, len = subs_columns.length; i < len; i++) {
-    sum = 0;
-    var row = subs_columns[i];
-    for (var j = 1, lenn = row.length; j < lenn; j++) {
-        sum = sum + row[j];
-    }
-    donut_data.push([row[0], sum]);
-}
-var types_of_shapes = []
-for (var i = 0, len = donut_data.length; i < len; i++) {
-    types_of_shapes.push(donut_data[i][0]);
-}
+//var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct- Dec'];
+//var subs_columns = [[]];
 
-var chart_main = c3.generate({
+d3.json("data/c3data.json", function(json) {
+        subs_columns = json;
+        var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct- Dec'];
+        var full_data = subs_columns.slice();
+        full_data.unshift(first_column);
+        var donut_data = [];
+        for (var i = 0, len = subs_columns.length; i < len; i++) {
+            sum = 0;
+            var row = subs_columns[i];
+            for (var j = 1, lenn = row.length; j < lenn; j++) {
+                sum = sum + row[j];
+            }
+            donut_data.push([row[0], sum]);
+        }
+        var types_of_shapes = []
+        for (var i = 0, len = donut_data.length; i < len; i++) {
+            types_of_shapes.push(donut_data[i][0]);
+        }
+        
+    var chart_main = c3.generate({
     bindto: '#main_chart',
-//    size: {
-//        height: 240,
-//        width: 480
-//    },
     data: {
-        x: 'x',
-//        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
-        columns: full_data
+      columns: subs_columns
     },
-//    subchart: {
-//        show: true
-//    },
     legend: {
-        position: 'inset',
         show: false
     },
-    axis: {
-        x: {
-            type: 'timeseries',
-            tick: {
-                format: '%m-%d-%Y'
-            },
-            label :{
-                text: 'The year of 2016',
-                position: 'outer-center'
-            }
-        },
-        y: {
-            label: {
-                text: 'No of UFOs Sighted',
-                position: 'outer-middle'
-            }
-        }
-    }
 });
 
 var chart_donut = c3.generate({
@@ -152,8 +72,8 @@ d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selec
         chart_donut.toggle(id);
         chart_main.toggle(id);
     });
-
-$('#A').on('click', function () {
+    
+    $('#A').on('click', function () {
     chart_main.transform('bar');
 });
 
@@ -177,4 +97,6 @@ $('#A').on('click', function () {
 
 $('#C').on('click', function () {
     chart_main.transform('line');
+});
+        
 });

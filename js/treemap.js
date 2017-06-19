@@ -275,7 +275,7 @@ if (window.location.hash === "") {
     d3.json("data/countries.json", function(err, res) {
         if (!err) {
             var data = d3.nest().key(function(d) { return d.region; }).key(function(d) { return d.subregion; }).entries(res);
-            main({title: "A Tree Map for UFO Sightings"}, {key: "North America", values: data});
+            main({title: ""}, {key: "North America", values: data});
         }
     });
 }

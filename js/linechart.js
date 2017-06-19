@@ -5,7 +5,7 @@
 
 d3.json("data/c3data.json", function(json) {
         subs_columns = json;
-        var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct- Dec'];
+        var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct - Dec'];
         var full_data = subs_columns.slice();
         full_data.unshift(first_column);
         var donut_data = [];
@@ -30,6 +30,23 @@ d3.json("data/c3data.json", function(json) {
     legend: {
         show: false
     },
+        axis: {
+      y: {
+        label: { // ADD
+          text: 'No of UFOs sighted',
+          position: 'outer-middle'
+            }
+      },
+    x: {
+        tick: {
+            values: ["a", 2, 4, 8, 16, 32]
+            },
+        label: { // ADD
+            text: 'Months of the year',
+            position: 'outer-middle'
+            }
+        }
+    }
 });
 
 var chart_donut = c3.generate({

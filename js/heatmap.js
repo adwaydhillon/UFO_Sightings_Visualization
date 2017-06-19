@@ -96,7 +96,6 @@ d3.csv("data/data.csv",
               .on('mouseout', function() {
                   if (mode == 'mouse') {
                       this.style.fill = curStateFill;
-                      console.log(1);
                   } else {
                       if (this.isSelected == 'true') {
                           this.style.fill = col_white;

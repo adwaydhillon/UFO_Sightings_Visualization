@@ -23,7 +23,7 @@ d3.json("data/c3data.json", function(json) {
         }
         
     var chart_main = c3.generate({
-    bindto: '#main_chart',
+    bindto: '#line_chart',
     data: {
       columns: subs_columns
     },

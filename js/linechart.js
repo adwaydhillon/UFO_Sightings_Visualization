@@ -3,9 +3,13 @@
 //var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct- Dec'];
 //var subs_columns = [[]];
 
-d3.json("data/c3data.json", function(json) {
+d3.json("data/scatter_c3data.json", function(json) {
         subs_columns = json;
-        var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct - Dec'];
+        var first_column =  ['x', 'Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        var months_list = first_column.slice();
+        console.log(months_list);
+        months_list.splice(0, 1);
+        console.log(months_list);
         var full_data = subs_columns.slice();
         full_data.unshift(first_column);
         var donut_data = [];
@@ -25,10 +29,24 @@ d3.json("data/c3data.json", function(json) {
     var chart_main = c3.generate({
     bindto: '#line_chart',
     data: {
-      columns: subs_columns
+      columns: subs_columns,
+        type: 'scatter'
     },
     legend: {
         show: false
+    },
+        tooltip: {
+        show: true
+    },
+        subchart: {
+        show: true
+    },
+        bar: {
+        width: {
+            ratio: 0.06 // this makes bar width 6% of length between ticks
+        }
+        // or
+        //width: 100 // this makes bar width 100px
     },
         axis: {
       y: {
@@ -39,7 +57,10 @@ d3.json("data/c3data.json", function(json) {
       },
     x: {
         tick: {
-            values: ["a", 2, 4, 8, 16, 32]
+            values: months_list,
+            culling: {
+                    max: 12 // the number of tick texts will be adjusted to less than this value
+                }
             },
         label: { // ADD
             text: 'Months of the year',
@@ -54,6 +75,9 @@ var chart_donut = c3.generate({
     data: {
         columns: donut_data,
         type : 'donut',
+    },
+    size: {
+        width: 540
     },
     legend: {
         show: false
@@ -92,6 +116,7 @@ d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selec
     
     $('#A').on('click', function () {
     chart_main.transform('bar');
+        
 });
 
 //$('#B').on('click', function () {
@@ -113,7 +138,7 @@ d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selec
 //});
 
 $('#C').on('click', function () {
-    chart_main.transform('line');
+    chart_main.transform('spline');
 });
         
 });

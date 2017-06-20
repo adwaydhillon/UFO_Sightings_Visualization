@@ -67,6 +67,8 @@
 }
 
 #legend {
+    display: flex; 
+    justify-content: space-around;
     width: 10%;
     float: left;
     height: 300px;
@@ -74,14 +76,14 @@
 }
 
 #line_chart {
-    width: 50%;
+    width: 100%;
     float: left;
     height: 300px;
     color: white;
 }
 
 #donut_chart {
-    width: 50%;
+    width: 20%;
     float: right;
     height: 300px;
     color: white;
@@ -96,6 +98,7 @@
     overflow: hidden; /* contain floated elements */
     background: #ccc
 }
+
 html, body{
     height:100%;
 }

@@ -205,30 +205,48 @@ function deselectStates() {
 //    updateData_LineChart(newData);
 //}
 
-function search_youtube(str_keywords) {
-    url = 'https://www.googleapis.com/youtube/v3/search';
-    var params = {
-        part: 'snippet',
-        key: 'AIzaSyDAKDaBy_JDwcScSHqDQimOOLjdPImLanc',
-        q: searchTerm
-    };
-  
-    $.getJSON(url, params, function (searchTerm) {
-        var html = "";
-    var entries = results.items;
-    
-    $.each(entries, function (index, value) {
-        var title = value.snippet.title;
-        var thumbnail = value.snippet.thumbnails.default.url;
-        html += '<p>' + title + '</p>';
-        html += '<img src="' + thumbnail + '">';
-        }); 
-    });
-}
+function googleApiClientReady(keyword_string) {
+                console.log("api called");
+                var video_id = '';
+                gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');
+                gapi.client.load('youtube', 'v3', function() {
+                      video_id = searchA(keyword_string);
+                });
+                return video_id;
+        }
+
+function searchA(keyword_string) {
+                var video_id = '';
+                var q = keyword_string;
+                var request = gapi.client.youtube.search.list({
+                        q: q, 
+                        part: 'snippet',
+                        maxResults: '1',
+                        type: 'video',
+                        order: 'relevance',
+                        videoEmbeddable: 'true'
+                });
+                request.execute(function(response) {
+                        var str = JSON.stringify(response.result);
+                        var json = response.result;
+                        video_id = json.items[0].id.videoId;
+                });
+                return video_id;
+        }
 
 function getNavBar_html(data) {
+    var video_id = '';
     
-    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>'
+    setTimeout(function() {
+            var keyword = "UFO Sighting " + data.State + " " + data.City;
+            console.log(keyword);
+            video_id = googleApiClientReady(keyword);
+            
+              }, 10);
+    
+    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
+    
+//    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>';
     
     var html_str = video + "<p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
     return html_str;
@@ -238,8 +256,6 @@ function getNavBar_html(data) {
 function openNav(data) {
     document.getElementById("mySidenav").style.width = "500px";
     var html_content = getNavBar_html(data);
-    console.log("string");
-    console.log(html_content);
     $('#mySidenav').append(html_content);
     //    var div = document.getElementById("mySidenav");
 //    div.style.width = "400px";
@@ -257,7 +273,7 @@ function openNav(data) {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
+    document.body.style.backgroundColor = "#353C3E";
 }
 
 function roundDecimal(coordinate) {
@@ -269,32 +285,41 @@ function roundDecimal(coordinate) {
 
 function get_info_on_sighting(sighting_coordinates) {
     //console.log(sighting_coordinates);
-    d3.csv("data/dataCSV.csv",
+    d3.json("data/clickedSighting.json",
     function(d){
-//            clicked_lat = roundDecimal(sighting_coordinates[1]);
-//            clicked_lng = roundDecimal(sighting_coordinates[0]);
-//            for (var i = 0, len = d.length; i < len; i++) {
-//                temp_lat = roundDecimal(d[i].lat);
-//                temp_lng = roundDecimal(d[i].lng);
-//                if (clicked_lat == temp_lat && clicked_lng == temp_lng) {
-//                    console.log("ITS WORKING!!");
-//                }
-//            }
-        return {
-                Date: "1/14/2016",
-                Time: "6:45:00 PM",
-                Country : "USA",
-                City : "495 Maryland Hwy",
-                State : "MD",
-                Shape : "Triangle",
-                Summary : "Triangle UFO over Maryland Highway 495N.",
-                Lat : "39.4262079",
-                Lng : "-79.3349455"
-        };
-    }, function(data){
-            console.log("ejbhb");
-            console.log(data[0]);
-        openNav(data[0]);
+        clicked_lat = String(sighting_coordinates[1]).split(".");
+        clicked_lat = clicked_lat[0] + "." + clicked_lat[1].substring(0,2);
+        
+        clicked_lng = String(sighting_coordinates[0]).split(".");
+        clicked_lng = clicked_lng[0] + "." + clicked_lng[1].substring(0,2);
+        
+        clicked_lat_lng = clicked_lat + "_" + clicked_lng;
+        sighting_data = {};
+        for (var key in d) {
+            if (d.hasOwnProperty(key) && (clicked_lat_lng === key)) {
+                sighting_data.Date = d[key][0];
+                sighting_data.Time = d[key][1];
+                sighting_data.Country = d[key][2];
+                sighting_data.City = d[key][3];
+                sighting_data.State = d[key][4];
+                sighting_data.Shape = d[key][5];
+                sighting_data.Summary = d[key][6];
+                sighting_data.Lat = clicked_lat_lng.split("_")[0];
+                sighting_data.Lng = clicked_lat_lng.split("_")[1];
+            }
+        }
+        if (Object.keys(sighting_data).length == 0) {
+                sighting_data.Date = "Data source not reliable to report";
+                sighting_data.Time = "Data source not reliable to report";
+                sighting_data.Country = "Data source not reliable to report";
+                sighting_data.City = "Data source not reliable to report";
+                sighting_data.State = "Data source not reliable to report";
+                sighting_data.Shape = "Data source not reliable to report";
+                sighting_data.Summary = "Data source not reliable to report";
+                sighting_data.Lat = "Data source not reliable to report";
+                sighting_data.Lng = "Data source not reliable to report";
+        }
+        openNav(sighting_data);
     });
 }
 
@@ -339,11 +364,10 @@ function click(d) {
                 .attr("transform", function(d) {
                     
                     return "translate(" + [projection(d)[0], projection(d)[1]] + ")" })
-                .attr("r", "5px")
+                .attr("r", "2px")
                 .attr("fill",col_red)
                 .on('click', function(d) {
                     get_info_on_sighting(d);
-                    openNav();
                 })
                 .on('mouseover',function(d){
                     d3.select("body").append("svg")

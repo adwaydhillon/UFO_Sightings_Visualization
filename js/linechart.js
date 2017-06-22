@@ -3,14 +3,14 @@
 //var first_column =  ['x', 'Jan - March', 'April - June', 'July - Sept', 'Oct- Dec'];
 //var subs_columns = [[]];
 
-d3.json("data/scatter_c3data.json", function(json) {
-        subs_columns = json;
+d3.json("data/c3data.json", function(monthly_json) {
+        d3.json("data/scatter_c3data.json", function(daily_json) {
+        subs_columns = monthly_json;
         var first_column =  ['x', 'Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         var months_list = first_column.slice();
-        console.log(months_list);
         months_list.splice(0, 1);
-        console.log(months_list);
         var full_data = subs_columns.slice();
+        var tempp = full_data.slice();
         full_data.unshift(first_column);
         var donut_data = [];
         for (var i = 0, len = subs_columns.length; i < len; i++) {
@@ -29,7 +29,7 @@ d3.json("data/scatter_c3data.json", function(json) {
     var chart_main = c3.generate({
     bindto: '#line_chart',
     data: {
-      columns: subs_columns,
+      columns: daily_json,
         type: 'scatter'
     },
     legend: {
@@ -42,11 +42,9 @@ d3.json("data/scatter_c3data.json", function(json) {
         show: true
     },
         bar: {
-        width: {
-            ratio: 0.06 // this makes bar width 6% of length between ticks
-        }
-        // or
-        //width: 100 // this makes bar width 100px
+            width: {
+                ratio: 0.06 // this makes bar width 6% of length between ticks
+            }
     },
         axis: {
       y: {
@@ -75,9 +73,6 @@ var chart_donut = c3.generate({
     data: {
         columns: donut_data,
         type : 'donut',
-    },
-    size: {
-        width: 540
     },
     legend: {
         show: false
@@ -114,31 +109,44 @@ d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selec
         chart_main.toggle(id);
     });
     
-    $('#A').on('click', function () {
-    chart_main.transform('bar');
+    $('#bar_button').on('click', function () {
+    //chart_main.transform('bar');
+        chart_main.unload();
+        chart_main.load({
+            columns: monthly_json,
+            type: 'bar'
+        });
+    });
         
+    $('#curve_button').on('click', function () {
+    //chart_main.transform('spline');
+        console.log(monthly_json);
+        chart_main.unload();
+        chart_main.load({
+            columns: monthly_json,
+            type: 'spline'
+        });
+    });
+
+    $('#scatter_button').on('click', function () {
+    //chart_main.transform('scatter');
+        chart_main.unload();
+        chart_main.load({
+            columns: daily_json,
+            type: 'scatter'
+        });
+    });
+
+    $('#stacked_bar_button').on('click', function () {
+        //chart_main.transform('scatter');
+        chart_main.unload();
+        chart_main.load({
+            columns: monthly_json,
+            type: 'bar',
+            groups: types_of_shapes
+        });
+    });
+
+});
 });
 
-//$('#B').on('click', function () {
-//    var chart = c3.generate({
-//    bindto: '#main_chart',
-//    data: {
-//        columns: subs_columns,
-//        type: 'bar',
-//        groups: [
-//            types_of_shapes
-//        ]
-//    },
-//    grid: {
-//        y: {
-//            lines: [{value:0}]
-//        }
-//    }
-//});
-//});
-
-$('#C').on('click', function () {
-    chart_main.transform('spline');
-});
-        
-});

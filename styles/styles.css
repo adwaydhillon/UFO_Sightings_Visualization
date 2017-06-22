@@ -44,49 +44,21 @@
     .sidenav a {font-size: 18px;}
 }
 
-#top_half{
+#wrapper{
     width: 100%;
+    position: relative;
+    height: 100%;
+    overflow: hidden; /* contain floated elements */
+    background: #353C3E;
+}
+
+#top_half {
+    width: 100%;
+    position: absolute;
     height: 50%;
+    top: 0;
     overflow: hidden; /* contain floated elements */
     background: #ccc;
-}
-
-#heatmap {
-    width: 50%;
-    float: left;
-    height: 300px;
-    background-color: blue;
-}
-
-#treemap {
-    width: 50%;
-    float: right;
-    height: 300px;
-    background-color: green;
-    color: white;
-}
-
-#legend {
-    display: flex; 
-    justify-content: space-around;
-    width: 10%;
-    float: left;
-    height: 300px;
-    color: green;
-}
-
-#line_chart {
-    width: 100%;
-    float: left;
-    height: 300px;
-    color: white;
-}
-
-#donut_chart {
-    width: 20%;
-    float: right;
-    height: 300px;
-    color: white;
 }
 
 #bottom_half{
@@ -94,26 +66,65 @@
     height: 50%;
     position: absolute;
     bottom: 0;
-    left: 0;
     overflow: hidden; /* contain floated elements */
-    background: #ccc
+    background: #353C3E
+}
+
+#legend {
+    height: 20%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#c3_stuff {
+    height: 80%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#heatmap {
+    width: 50%;
+    float: left;
+    height: 300px;
+    background-color: #353C3E;
+    border: none !important;
+}
+
+#treemap {
+    width: 50%;
+    float: right;
+    height: 300px;
+    color: white;
+}
+
+#button_container {
+    width: 20%;
+    float: left;
+    height: 100%;
+    color: #353C3E;
+}
+
+#line_chart {
+    width: 60%;
+    float: left;
+    height: 100%;
+    color: #353C3E;
+    border: none !important;
+}
+
+#donut_chart {
+    width: 20%;
+    float: left;
+    height: 100%;
+    color: #353C3E;
 }
 
 html, body{
     height:100%;
-}
-
-#legend {
-    float: left; 
-    width: 20%;
-}
-#main_chart { 
-    float: left;
-    width: 50%;
-}
-#donut_chart{
-    float: left;
-    width: 30%;
+    width: 100%;
+    background-color: #353C3E;
 }
 
 .title {
@@ -153,6 +164,11 @@ rect.parent {
   fill: #ee9700;
 }
 
+.background {
+  fill: #353C3E;
+  pointer-events: all;
+}
+
 .children rect.parent,
 .grandparent rect {
   cursor: pointer;
@@ -165,4 +181,30 @@ rect.parent {
 
 .children:hover rect.child {
   fill: #bbb;
+}
+
+#states {
+  stroke: #fff;
+  stroke-width:2px;
+}
+
+#states text {
+    fill: #000;
+    font-family: sans-serif;
+    stroke: none;
+    text-anchor:middle;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+#states .active {
+  fill: #fff !important;
+}
+
+#states text.active {
+  font-size: 8px;
+  font-weight:bold;
+  stroke-width: .5px;
+  fill: #fff !important;
+  stroke: #000;
 }

@@ -13,9 +13,6 @@ var defaults = {
     title: "",
     width: $("#treemap").width(),
     height: $("#treemap").height()
-//        centered;
-//    width: 560,
-//    height: 350
 };
 
 function main(o, data) {

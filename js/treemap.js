@@ -1,5 +1,3 @@
-
-
 window.addEventListener('message', function(e) {
     var opts = e.data.opts,
         data = e.data.data;
@@ -75,6 +73,16 @@ function main(o, data) {
   } else {
     root = data;
   }
+    
+    function initialize(root) {
+        if (root != null) {
+            console.log(root);
+            root.x = root.y = 0;
+            root.dx = width;
+            root.dy = height;
+            root.depth = 0;
+        }
+    }
 
   initialize(root);
   accumulate(root);
@@ -86,21 +94,16 @@ function main(o, data) {
     window.parent.postMessage({height: myheight}, '*');
   }
 
-  function initialize(root) {
-    root.x = root.y = 0;
-    root.dx = width;
-    root.dy = height;
-    root.depth = 0;
-  }
-
   // Aggregate the values for internal nodes. This is normally done by the
   // treemap layout, but not here because of our custom implementation.
   // We also take a snapshot of the original children (_children) to avoid
   // the children being overwritten when when layout is computed.
   function accumulate(d) {
-    return (d._children = d.values)
-        ? d.value = d.values.reduce(function(p, v) { return p + accumulate(v); }, 0)
+      if (d != null) {
+          return (d._children = d.values)
+        ? d.value = d.values.reduce(function(p, v) {    return p + accumulate(v); }, 0)
         : d.value;
+      }
   }
 
   // Compute the treemap layout recursively such that each group of siblings
@@ -111,7 +114,8 @@ function main(o, data) {
   // of sibling was laid out in 1×1, we must rescale to fit using absolute
   // coordinates. This lets us use a viewport to zoom.
   function layout(d) {
-    if (d._children) {
+      if (d != null) {
+          if (d._children) {
       treemap.nodes({_children: d._children});
       d._children.forEach(function(c) {
         c.x = d.x + c.x * d.dx;
@@ -122,9 +126,11 @@ function main(o, data) {
         layout(c);
       });
     }
+      }
   }
 
   function display(d) {
+      if (d != null) {
     grandparent
         .datum(d.parent)
         .on("click", transition)
@@ -211,6 +217,7 @@ function main(o, data) {
       });
     }
     return g;
+  }
   }
 
   function text(text) {

@@ -32,11 +32,11 @@ var svg = d3.select("#heatmap").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-svg.append("rect")
-    .attr("class", "background")
-    .attr("width", width)
-    .attr("height", height)
-    .on("click", click);
+//svg.append("rect")
+//    .attr("class", "background")
+//    .attr("width", width)
+//    .attr("height", height)
+//    .on("click", click);
 
 var g = svg.append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")

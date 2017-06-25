@@ -36,6 +36,10 @@
 #main {
     transition: margin-left .5s;
     padding: 20px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
@@ -44,37 +48,46 @@
     .sidenav a {font-size: 18px;}
 }
 
+/*
 #wrapper{
     width: 100%;
     position: relative;
     height: 100%;
+    overflow: hidden;  contain floated elements 
+    background: #353C3E;
+}
+*/
+
+#top_half {
+    width: 100%;
+    position: relative;
+    height: 40%;
+    top: 0;
     overflow: hidden; /* contain floated elements */
     background: #353C3E;
 }
 
-#top_half {
+#middle {
     width: 100%;
-    position: absolute;
-    height: 50%;
-    top: 0;
+    position: relative;
+    height: 10%;
     overflow: hidden; /* contain floated elements */
-    background: #ccc;
+    background: #353C3E;
+}
+
+.middle> .legend {
+    position: relative;
+    width: 100%;
+    left: 30%;
 }
 
 #bottom_half{
     width: 100%;
-    height: 50%;
+    height: 45%;
     position: absolute;
     bottom: 0;
     overflow: hidden; /* contain floated elements */
     background: #353C3E
-}
-
-#legend {
-    height: 20%;
-    position: absolute;
-    top: 0;
-    width: 100%;
 }
 
 #c3_stuff {

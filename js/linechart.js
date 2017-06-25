@@ -87,7 +87,7 @@ function toggle(id) {
     chart_donut.toggle(id);
 }
 
-d3.select('.bottom_half').insert('div', '#legend').attr('class', 'legend').selectAll('span')
+d3.select('.middle').insert('div', '#legend').attr('class', 'legend').selectAll('span')
     .data(types_of_shapes)
     .enter().append('span')
     .attr('data-id', function (id) { return id; })

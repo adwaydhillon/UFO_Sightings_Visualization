@@ -12,7 +12,7 @@
 
     <!-- Load c3.css -->
     <link href="libs/c3/c3.css" rel="stylesheet">
-    <!-- Load d3.js and c3.js -->
+    <!-- Load d3.js -->
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
@@ -35,13 +35,14 @@
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="main">  
-        <div class="wrapper">
-            <div class = "top_half">
+<!--        <div class="wrapper">-->
+            <div id = "top_half">
                 <div id="heatmap"></div>
                 <div id="treemap"></div> 
-            </div>
+            </div><br>
+            <div class = "middle"></div>
             <br>
-            <div class = "bottom_half">
+            <div class = "bottom_half">BOTTOM
                 <div class = "c3_stuff">
                         <div class = "button_container">
                             <br>
@@ -55,7 +56,7 @@
                 </div> 
             </div>
         </div>
-    </div>
+<!--    </div>-->
 <script src="js/heatmap.js"></script>
 <script src="js/treemap.js"></script>
 <script src="js/linechart.js"></script>

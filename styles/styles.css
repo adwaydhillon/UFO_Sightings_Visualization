@@ -73,22 +73,37 @@
     height: 10%;
     overflow: hidden; /* contain floated elements */
     background: #353C3E;
-    white-space:nowrap;
+    display: inline-block;
 }
 
 .middle> .legend {
     position: relative;
     width: 100%;
-    left: 30%;
     cursor: pointer;
-    white-space:nowrap;
+    display: inline-block;
 }
 
-.legend span {
+.middle li {
     display: inline-block;
+    text-align: left;
     padding: 5px;
     cursor: pointer;
 }
+
+@media (min-width: 600px) {
+  .main { display:flex; width:100%; }
+  .legend { flex:1; width: 50%; }
+  .chart { flex:1; width: 50%; }
+}
+
+.item { list-style-type:none; padding:0 0 1em; }
+.color { display:inline-block; width:0.55em; height: 0.55em; margin:0 0.3em 0.3em; line-height: 1em; vertical-align:middle;}
+.title {}
+.note { font-style: oblique; font-size: 0.8em; margin-left:1.5em; }
+
+.c3 {}
+
+.c3-axis-x .tick { display: none; }
 
 #bottom_half{
     width: 100%;
@@ -156,6 +171,7 @@ html, body{
     margin-top: 6px;
     margin-bottom: 6px;
 }
+
 text {
   pointer-events: none;
 }

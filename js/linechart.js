@@ -87,13 +87,13 @@ function toggle(id) {
     chart_donut.toggle(id);
 }
 
-d3.select('.middle').insert('div', '#legend').attr('class', 'legend').selectAll('span')
+d3.select('.middle').insert('div', '#legend').attr('class', 'legend').selectAll('div')
     .data(types_of_shapes)
-    .enter().append('span')
+    .enter().append('div')
     .attr('data-id', function (id) { return id; })
     .html(function (id) { return id; })
     .each(function (id) {
-        d3.select(this).style('background-color', chart_main.color(id));
+        d3.select(this).append('span').style('background-color', chart_main.color(id));
     })
     .on('mouseover', function (id) {
         chart_donut.focus(id);

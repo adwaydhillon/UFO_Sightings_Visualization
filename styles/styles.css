@@ -73,12 +73,21 @@
     height: 10%;
     overflow: hidden; /* contain floated elements */
     background: #353C3E;
+    white-space:nowrap;
 }
 
 .middle> .legend {
     position: relative;
     width: 100%;
     left: 30%;
+    cursor: pointer;
+    white-space:nowrap;
+}
+
+.legend span {
+    display: inline-block;
+    padding: 5px;
+    cursor: pointer;
 }
 
 #bottom_half{

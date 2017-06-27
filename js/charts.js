@@ -40,6 +40,18 @@ var options = {
         enabled: true,
     },
     plotOptions: {
+        series: {
+          events: { 
+                        legendItemClick: function(){
+                        var index = this.index,
+                        chart = this.chart,
+                        series = chart.series,
+                        len = series.length,
+                        pieSerie = series[len-1];
+                        pieSerie.data[index].setVisible();
+                     }
+                 }  
+        },
         pie: {
             allowPointSelect: true,
             cursor: 'pointer',
@@ -155,7 +167,7 @@ var chart1 = new Highcharts.Chart(options);
 
     $('#scatter_button').on('click', function () {
         options.chart.renderTo = 'main_chart_container';
-         options.plotOptions.column.stacking = '';
+        options.plotOptions.column.stacking = '';
         options.chart.type = 'scatter';
         options.chart.polar = false;
         options.xAxis.title.margin = 10;
@@ -185,9 +197,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.polar = true;
         options.chart.type = 'line';
         options.xAxis.categories = ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'];
-
-//                options.xAxis.title.margin = 10;
-//                options.xAxis.title.text = 'Days of the Year';
+        options.yAxis.gridLineInterpolation = 'polygon';
         options.title.text = 'Daily UFO Sightings';
         options.series = quarterly_json;
         var chart1 = new Highcharts.Chart(options);

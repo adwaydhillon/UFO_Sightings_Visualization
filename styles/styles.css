@@ -61,20 +61,22 @@
 #top_half {
     width: 100%;
     position: relative;
-    height: 40%;
+    height: 50%;
     top: 0;
     overflow: hidden; /* contain floated elements */
     background: #353C3E;
 }
 
+/*
 #middle {
     width: 100%;
     position: relative;
     height: 10%;
-    overflow: hidden; /* contain floated elements */
+    overflow: hidden;  contain floated elements 
     background: #353C3E;
     display: inline-block;
 }
+*/
 
 .middle> .legend {
     position: relative;
@@ -99,7 +101,7 @@
 .item { list-style-type:none; padding:0 0 1em; }
 .color { display:inline-block; width:0.55em; height: 0.55em; margin:0 0.3em 0.3em; line-height: 1em; vertical-align:middle;}
 .title {}
-.note { font-style: oblique; font-size: 0.8em; margin-left:1.5em; }
+.note { font-style: oblique; font-size: 0.4em; margin-left:1.5em; }
 
 .c3 {}
 
@@ -107,11 +109,12 @@
 
 #bottom_half{
     width: 100%;
-    height: 45%;
+    height: 50%;
     position: absolute;
     bottom: 0;
     overflow: hidden; /* contain floated elements */
-    background: #353C3E
+    background: #353C3E;
+    display: inline-block;
 }
 
 #c3_stuff {
@@ -137,13 +140,13 @@
 }
 
 #button_container {
-    width: 20%;
     float: left;
     height: 100%;
     color: #353C3E;
 }
 
-#line_chart {
+#main_chart_container {
+    padding-top: 0.5cm;
     width: 60%;
     float: left;
     height: 100%;
@@ -152,8 +155,8 @@
 }
 
 #donut_chart {
-    width: 20%;
-    float: left;
+    width: 30%;
+    float: right;
     height: 100%;
     color: #353C3E;
 }
@@ -180,7 +183,7 @@ text {
   font-weight: bold;
 }
 
-rect {
+tree_rect {
   fill: none;
   stroke: #fff;
 }

@@ -273,7 +273,7 @@ function openNav(data) {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "#353C3E";
+    document.body.style.backgroundColor = "#2a2a2b";
 }
 
 function roundDecimal(coordinate) {

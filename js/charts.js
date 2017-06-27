@@ -10,23 +10,10 @@ d3.json("data/quarterly_highcharts_data.json", function(quarterly_json) {
 var options = {
     chart: {
         polar: false,
-//       events: {
-//            drilldown: function (e) {
-//                if (!e.seriesOptions) {
-//                    var chart = this;
-//                    // Show the loading label
-//                    chart.showLoading('Loading ...');
-//                    setTimeout(function () {
-//                        chart.hideLoading();
-//                        chart.addSeriesAsDrilldown(e.point, series);
-//                    }, 1000); 
-//                }
-//            }
-//        },
         plotBorderWidth: 0
     },
     title: {
-        text: 'Monthly UFO Sightings',
+        text: 'Daily UFO Sightings',
     },
     credits: {
         enabled: false
@@ -36,10 +23,10 @@ var options = {
     },
     xAxis: {
             type: 'category',
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+//            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         title: {
                 margin: 10,
-                text: 'Months of the Year'
+                text: 'Days of the Year'
             }
     },
     yAxis: {
@@ -53,6 +40,14 @@ var options = {
         enabled: true,
     },
     plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                    enabled: true
+                },
+                showInLegend: true
+        },
         column: {
             stacking: ''
         },
@@ -84,7 +79,7 @@ var options = {
             }
         }
     },
-    series: monthly_json,
+    series: daily_json,
     drilldown: {
         series: []
     }
@@ -96,6 +91,9 @@ var options2 = {
             plotBorderWidth: null,
             plotShadow: false,
             type: 'pie'
+        },
+        credits: {
+            enabled: false
         },
         title: {
             text: 'Shapes of UFOs'
@@ -111,7 +109,7 @@ var options2 = {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: true
                 },
                 showInLegend: true
             }
@@ -125,10 +123,10 @@ var chart2 = new Highcharts.Chart(options2);
 
 // Column chart
 options.chart.renderTo = 'main_chart_container';
-options.chart.type = 'column';
+options.chart.type = 'scatter';
 options.chart.zoomType = 'xy';
 var chart1 = new Highcharts.Chart(options);
-    
+
     $('#bar_button').on('click', function () {
         options.chart.renderTo = 'main_chart_container';
         options.chart.type = 'column';

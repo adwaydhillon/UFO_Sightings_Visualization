@@ -54,7 +54,7 @@ with open('data/dataCSV.csv', 'rU') as csvfile:
                 table_data[10]['y'] += 1
         count = count + 1
         
-dict = {'name': 'Shapes of UFOs Sighted', 'colorByPoint': 'true', 'data': table_data}
+dict = {'name': 'Share', 'colorByPoint': 'true', 'data': table_data}
 table_data = [dict]
 
 with open('data/pie_highcharts_data.json', 'w') as outfile:

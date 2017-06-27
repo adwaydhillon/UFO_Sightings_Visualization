@@ -64,33 +64,9 @@
     height: 50%;
     top: 0;
     overflow: hidden; /* contain floated elements */
-    background: #353C3E;
+    background: #2a2a2b;
 }
 
-/*
-#middle {
-    width: 100%;
-    position: relative;
-    height: 10%;
-    overflow: hidden;  contain floated elements 
-    background: #353C3E;
-    display: inline-block;
-}
-*/
-
-.middle> .legend {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-    display: inline-block;
-}
-
-.middle li {
-    display: inline-block;
-    text-align: left;
-    padding: 5px;
-    cursor: pointer;
-}
 
 @media (min-width: 600px) {
   .main { display:flex; width:100%; }
@@ -98,14 +74,6 @@
   .chart { flex:1; width: 50%; }
 }
 
-.item { list-style-type:none; padding:0 0 1em; }
-.color { display:inline-block; width:0.55em; height: 0.55em; margin:0 0.3em 0.3em; line-height: 1em; vertical-align:middle;}
-.title {}
-.note { font-style: oblique; font-size: 0.4em; margin-left:1.5em; }
-
-.c3 {}
-
-.c3-axis-x .tick { display: none; }
 
 #bottom_half{
     width: 100%;
@@ -113,7 +81,7 @@
     position: absolute;
     bottom: 0;
     overflow: hidden; /* contain floated elements */
-    background: #353C3E;
+    background: #2a2a2b;
     display: inline-block;
 }
 
@@ -128,7 +96,7 @@
     width: 50%;
     float: left;
     height: 300px;
-    background-color: #353C3E;
+    background-color: #2a2a2b;
     border: none !important;
 }
 
@@ -146,12 +114,10 @@
 }
 
 #main_chart_container {
-    padding-top: 0.5cm;
-    width: 60%;
+    width: 70%;
     float: left;
     height: 100%;
     color: #353C3E;
-    border: none !important;
 }
 
 #donut_chart {
@@ -159,12 +125,14 @@
     float: right;
     height: 100%;
     color: #353C3E;
+    padding-right: 20px;
 }
 
 html, body{
+    
     height:100%;
     width: 100%;
-    background-color: #353C3E;
+    background-color: #2a2a2b;
 }
 
 .title {

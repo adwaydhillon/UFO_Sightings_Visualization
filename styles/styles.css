@@ -1,3 +1,10 @@
+heading {
+    font-family: 'Unica One';
+    font-size: 36px;
+    color: aliceblue;
+    width: 100%;
+}
+
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */

@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <head>
-    <font size="46"><center>We're not alone...</center></font>
+    <heading>
+        <center><img src="res/drawable/UFO.png" width="85" height="77" padding/>   &nbsp; &nbsp; &nbsp; &nbsp;We're not alone...  &nbsp; &nbsp; &nbsp; &nbsp; <img src="res/drawable/UFO.png" width="85" height="=77"/></center>
+    </heading>
+
     <meta charset="utf-8">
-    <title>D3.js Visualization</title>
+    <title>D3.js UFO Visualization</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="libs/c3/c3.min.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+    <link href='https://fonts.googleapis.com/css?family=Unica One' rel='stylesheet'>
     
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
@@ -22,24 +26,18 @@
     <script src="https://unpkg.com/topojson@3"></script>
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<!--    <svg width="960" height="500"></svg>-->
 </head>
 
 
 <body>
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-<!--
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
--->
     </div>
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
     <div id="main">  
 <!--        <div class="wrapper">-->
+        
             <div id = "top_half">
                 <div id="heatmap"></div>
                 <div id="treemap"></div> 

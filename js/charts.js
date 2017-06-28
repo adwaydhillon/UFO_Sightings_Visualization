@@ -38,6 +38,9 @@ var options = {
     legend: {
         width: 0,
         enabled: true,
+        itemStyle: {
+            	'cursor': 'pointer'
+            }
     },
     plotOptions: {
         series: {
@@ -142,6 +145,7 @@ var chart1 = new Highcharts.Chart(options);
     $('#bar_button').on('click', function () {
         options.chart.renderTo = 'main_chart_container';
         options.chart.type = 'column';
+        options.legend.itemStyle.cursor = 'pointer';
         options.chart.polar = false;
         options.plotOptions.column.stacking = '';
         options.title.text = 'Monthly UFO Sightings';

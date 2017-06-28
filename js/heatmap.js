@@ -257,14 +257,6 @@ function openNav(data) {
     document.getElementById("mySidenav").style.width = "500px";
     var html_content = getNavBar_html(data);
     $('#mySidenav').append(html_content);
-    //    var div = document.getElementById("mySidenav");
-//    div.style.width = "400px";
-//    div.insertAdjacentHTML("work");
-//    var content = document.createTextNode("<YOUR_CONTENT> <br> 2?");
-//    div.appendChild(content);
-//    var html_content = getNavBar_html(data);
-//    mySidenav.innerHTML = "hey";
-    //div.innerHTML = div.innerHTML + 'Extra stuff';
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
@@ -284,7 +276,6 @@ function roundDecimal(coordinate) {
 }
 
 function get_info_on_sighting(sighting_coordinates) {
-    //console.log(sighting_coordinates);
     d3.json("data/clickedSighting.json",
     function(d){
         clicked_lat = String(sighting_coordinates[1]).split(".");

@@ -189,6 +189,7 @@ function googleApiClientReady(keyword_string) {
         }
 
 function searchA(keyword_string) {
+    
                 var video_id = '';
                 var q = keyword_string;
                 var request = gapi.client.youtube.search.list({
@@ -203,6 +204,7 @@ function searchA(keyword_string) {
                         var str = JSON.stringify(response.result);
                         var json = response.result;
                         video_id = json.items[0].id.videoId;
+                        console.log(video_id);
                 });
                 return video_id;
         }
@@ -211,17 +213,22 @@ function getNavBar_html(data) {
     var video_id = '';
     
     setTimeout(function() {
-            var keyword = "UFO Sighting " + data.State + " " + data.City;
-            console.log(keyword);
-            video_id = googleApiClientReady(keyword);
+            var keyword_string = "UFO Sighting " + data.State + " " + data.City;
+            var video_id = '';
+                gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');
+                gapi.client.load('youtube', 'v3', function() {
+                      console.log("api loaded");
+                      video_id = searchA(keyword_string);
+                });
+//            video_id = googleApiClientReady(keyword);
             
-              }, 10);
+              }, 3000);
     
     var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
     
 //    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>';
     
-    var html_str = video + "<p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
+    var html_str = video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
     return html_str;
 }
 

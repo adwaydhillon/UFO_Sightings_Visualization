@@ -150,7 +150,7 @@ html, body{
     margin-bottom: 6px;
 }
 
-text {
+#treemap text {
   pointer-events: none;
 }
 
@@ -173,7 +173,7 @@ rect.parent {
 }
 
 .grandparent rect {
-  fill: #BB432A;
+  fill: #E66A39;
 }
 
 .grandparent:hover rect {

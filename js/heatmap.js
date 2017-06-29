@@ -13,11 +13,7 @@ var globalLowerDate, globalUpperDate;
 var globalAggSighting;
 var clicked_sighting = {};
 
-//var width = 650,
-//    height = 263,
-//    centered;
-
-    var width = $("#heatmap").width(),
+var width = $("#heatmap").width(),
         height = $("#heatmap").height(),
         centered;
 
@@ -32,11 +28,6 @@ var svg = d3.select("#heatmap").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-//svg.append("rect")
-//    .attr("class", "background")
-//    .attr("width", width)
-//    .attr("height", height)
-//    .on("click", click);
 
 var g = svg.append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
@@ -72,9 +63,6 @@ d3.csv("data/data.csv",
         
         //Populate graphs initially
         selectedStates.push("ga");
-//        sendDataToBarChart(window.statesHashmap);
-//        updateData_LineChart(window.datesHashmapArray);
-        
 
         d3.json("data/states.json", function(json) {
           heatmap = d3.scale.linear()
@@ -189,21 +177,6 @@ function deselectStates() {
         return heatmap(Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1)); });
     selectedStates = [];
 }
-
-//function sendDataToBarChart(newData) {
-//    pushableData = [];
-//    console.log("this is the pushable data after supposedly being emptied:");
-//    console.log(pushableData);
-//    combineData();
-//    console.log("Data Being Pushed: " + pushableData);
-//    updateData(pushableData);
-//    //selectedStates = [];
-//
-//}
-//
-//function sendDataToLineChart(newData) {
-//    updateData_LineChart(newData);
-//}
 
 function googleApiClientReady(keyword_string) {
                 console.log("api called");
@@ -401,8 +374,6 @@ var aggregateSighting = function(startDate, endDate, data) {
         //The UFO sighting falls within the provided range
         else if(datetime.getTime() < endDate.getTime() &&
          datetime.getTime() > startDate.getTime()) {
-            //debug
-            //console.log("Within range: " + " UFO " + currentVal.Shape + " was sighted on " + currentVal["Date/Time"]);
 
             if(state in statesHashmap) {
                 statesHashmap[state]++;
@@ -426,7 +397,6 @@ var aggregateSighting = function(startDate, endDate, data) {
     var datesHashmapArray = Object.keys(datesHashmap).map(function(d) {
         return {date: d, close: +datesHashmap[d]};
     });
-//    console.log(datesHashmapArray);
     window.datesHashmapArray = datesHashmapArray;
     window.statesHashmap = statesHashmap;
     return statesHashmapArray;
@@ -465,323 +435,3 @@ var updateHeatMap = function() {
                 return heatmap(Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1));
               });
 }
-//
-//map = d3.carto.map();
-//    d3.select("#map").call(map);
-//
-//    map.mode("projection");
-//
-//    countryLayer = d3.carto.layer.topojson();
-//    
-//    countryLayer.path("world.topojson")
-//    .label("Countries")
-//    .renderMode("svg")
-//    .cssClass("country")
-//    .on("load", runCarto);
-//
-//    map.addCartoLayer(countryLayer);
-//    
-//    function runCarto() {
-//      d3.selectAll("path").style("fill", function(d) {return colorScale(parseFloat(d.properties.gdp))})
-//      map.continuousCartogram(countryLayer, function(d) {return d.properties.gdp});
-//    }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-** * * * * * * * * * * * * * * * Heatmap Buttons * * * * * * * * * * * * * * *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-//var containerRef = d3.select('.container').node();
-//var HMbuttonContainerWidth = 128;
-//var HMbuttonDim = 32;
-//
-//var buttonGroup = d3.select('.container')
-//    .append('svg')
-//    .style('position', 'absolute')
-//    .style('z-index', '2')
-//    //Move it to top left corner
-//    .style('transform', 'translateX(' + (HMbuttonContainerWidth) * -1 + 'px)')
-//    .style('width', '128px')
-//    .style('height', '32px')
-//    .append('g');
-//
-//var mouseButton = buttonGroup.append('rect')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .attr('class', 'selected')
-//    .attr('stroke-width', '2px')
-//    //.attr('stroke', col_orange)
-//    .attr('fill', col_white);
-//
-//var selectStatesButton = buttonGroup.append('rect')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .style('transform', 'translateX(' + HMbuttonDim + 'px)')
-//    .attr('class', 'selectable')
-//    .attr('stroke-width', '2px')
-//    //.attr('stroke', col_orange)
-//    .attr('fill', col_orange)
-//    .attr('opacity', 0.5);
-
-//var sendToBarChart = buttonGroup.append('rect')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .style('transform', 'translateX(' + (2 * HMbuttonDim) + 'px)')
-//    .attr('class', 'unselectable')
-//    .attr('stroke-width', '2px')
-//    //.attr('stroke', col_orange)
-//    .attr('fill', col_black);
-//
-//var sendToLineChart = buttonGroup.append('rect')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .style('transform', 'translateX(' + (3 * HMbuttonDim) + 'px)')
-//    .attr('class', 'unselectable')
-//    .attr('stroke-width', '2px')
-//    //.attr('stroke', col_orange)
-//    .attr('fill', col_black);
-
-//Add text to buttons.
-
-//var mouseButtonText = buttonGroup.append('text')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .attr('text-anchor', 'middle')
-//    .attr('alignment-baseline', 'central')
-//    .style('pointer-events', 'none')
-//    .attr('fill', col_gray)
-//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-//    .attr('x', '' + (0.5 * HMbuttonDim) + 'px')
-//    .text('M');
-//
-//var selectStatesButtonText = buttonGroup.append('text')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .attr('text-anchor', 'middle')
-//    .attr('alignment-baseline', 'central')
-//    .style('pointer-events', 'none')
-//    .attr('fill', col_gray)
-//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-//    .attr('x', '' + (1.5 * HMbuttonDim) + 'px')
-//    .text('S');
-
-//var sendToBarChartButtonText = buttonGroup.append('text')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .attr('text-anchor', 'middle')
-//    .attr('alignment-baseline', 'central')
-//    .style('pointer-events', 'none')
-//    .attr('fill', col_gray)
-//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-//    .attr('x', '' + (2.5 * HMbuttonDim) + 'px')
-//    .text('B');
-//
-//var sendToLineChartButtonText = buttonGroup.append('text')
-//    .style('width', '32px')
-//    .style('height', '32px')
-//    .attr('text-anchor', 'middle')
-//    .attr('alignment-baseline', 'central')
-//    .style('pointer-events', 'none')
-//    .attr('fill', col_gray)
-//    .attr('y', '' + (0.5 * HMbuttonDim) + 'px')
-//    .attr('x', '' + (3.5 * HMbuttonDim) + 'px')
-//    .text('L');
-
-
-//Select State Button Actions
-// mouse over select state button button
-//selectStatesButton.on('mouseover', function() {
-//    if (selectStatesButton.attr('class') == 'selected') {
-//
-//    } else {
-//        selectStatesButton.attr('opacity', 1);
-//    }
-//    console.log('Hovering over Select States Button');
-//});
-//
-//selectStatesButton.on('mouseout', function() {
-//    if (selectStatesButton.attr('class') == 'selected') {
-//
-//    } else {
-//        selectStatesButton.attr('opacity', 0.5)
-//    }
-//});
-//
-//selectStatesButton.on('click', function() {
-//    deselectStates();
-//    if (selectStatesButton.attr('class') == 'selectable') {
-//
-//        mode = 'select'
-//
-//        selectStatesButton.attr('class', 'selected');
-//        selectStatesButton.attr('fill', col_white);
-//        selectStatesButton.attr('opacity', 1);
-//
-//        mouseButton.attr('class', 'selectable');
-//        mouseButton.attr('opacity', 0.5);
-//        mouseButton.attr('fill', col_orange);
-//
-//        //CODE THE CARTOGRAM HERE
-//        console.log('ready to render cartogram');
-//        runCarto();
-//
-//        sendToBarChart.attr('class', 'unselectable');
-//        sendToBarChart.attr('opacity', 1);
-//        sendToBarChart.attr('fill', col_black);
-//
-//        sendToLineChart.attr('class', 'unselectable');
-//        sendToLineChart.attr('opacity', 1);
-//        sendToLineChart.attr('fill', col_black);
-//
-//    } else if (selectStatesButton.attr('class') == 'selected') {
-//
-//        mode = 'mouse'
-//
-//        sendToBarChart.attr('class', 'unselectable');
-//        sendToBarChart.attr('opacity', 1);
-//        sendToBarChart.attr('fill', col_black);
-//
-//        sendToLineChart.attr('class', 'unselectable');
-//        sendToLineChart.attr('opacity', 1);
-//        sendToLineChart.attr('fill', col_black);
-//
-//
-//        selectStatesButton.attr('class', 'selectable');
-//        selectStatesButton.attr('fill', col_orange);
-//
-//        mouseButton.attr('class', 'selected');
-//        mouseButton.attr('opacity', 1);
-//        mouseButton.attr('fill', col_white);
-//
-//    }
-//});
-//
-////Mouse Button Actions
-//// mouse over select state button button
-//mouseButton.on('mouseover', function() {
-//    if (mouseButton.attr('class') == 'selected') {
-//
-//    } else {
-//        mouseButton.attr('opacity', 1);
-//    }
-//    console.log('Hovering over Mouse Button');
-//});
-//
-//mouseButton.on('mouseout', function() {
-//    if (mouseButton.attr('class') == 'selected') {
-//
-//    } else {
-//        mouseButton.attr('opacity', 0.5)
-//    }
-//});
-//
-//mouseButton.on('click', function() {
-//    if (mouseButton.attr('class') == 'selectable') {
-//
-//        mode = 'mouse';
-//        deselectStates();
-//
-//        mouseButton.attr('class', 'selected');
-//        mouseButton.attr('fill', col_white);
-//        mouseButton.attr('opacity', 1);
-//
-//        selectStatesButton.attr('class', 'selectable');
-//        selectStatesButton.attr('opacity', 0.5);
-//        selectStatesButton.attr('fill', col_orange);
-//
-//        sendToBarChart.attr('class', 'unselectable');
-//        sendToBarChart.attr('fill', col_black);
-//        sendToBarChart.attr('opacity', 1);
-//
-//        sendToLineChart.attr('class', 'unselectable');
-//        sendToLineChart.attr('fill', col_black);
-//        sendToLineChart.attr('opacity', 1);
-//
-//    }
-//});
-
-////Send to bar chart button actions
-//
-//sendToBarChart.on('mouseover', function() {
-//    if (sendToBarChart.attr('class') == 'selected') {
-//
-//    } else {
-//        sendToBarChart.attr('opacity', 1);
-//    }
-//    console.log('Hovering over Send To Bar Chart Button');
-//});
-//
-//sendToBarChart.on('mouseout', function() {
-//    if (sendToBarChart.attr('class') == 'selected') {
-//
-//    } else if (sendToBarChart.attr('class') == 'selectable') {
-//        sendToBarChart.attr('opacity', 0.5)
-//    }
-//});
-//
-//sendToBarChart.on('click', function() {
-//
-//    console.log('Perform data push to bar chart.');
-//    console.log('Remember to set this button as selectable whenever the user updates thes states.');
-//
-//    if (sendToBarChart.attr('class') == 'selectable') {
-//
-//        sendToBarChart.attr('class', 'selected');
-//        sendToBarChart.attr('fill', col_white);
-//        sendToBarChart.attr('opacity', 1);
-//
-//        selectStatesButton.attr('class', 'selectable');
-//        selectStatesButton.attr('opacity', 0.5);
-//        selectStatesButton.attr('fill', col_orange);
-//
-//        mouseButton.attr('class', 'selectable');
-//        mouseButton.attr('opacity', 0.5);
-//        mouseButton.attr('fill', col_orange);
-//
-//        sendDataToBarChart(pushableData);
-//
-//    } else {
-//
-//    }
-//});
-
-//Send to line chart button actions
-//sendToLineChart.on('mouseover', function() {
-//    if (sendToLineChart.attr('class') == 'selected') {
-//
-//    } else {
-//        sendToLineChart.attr('opacity', 1);
-//    }
-//    console.log('Hovering over Send To Line Chart Button');
-//});
-//
-//sendToLineChart.on('mouseout', function() {
-//    if (sendToLineChart.attr('class') == 'selected') {
-//
-//    } else if (sendToBarChart.attr('class') == 'selectable') {
-//        sendToLineChart.attr('opacity', 0.5)
-//    }
-//});
-//
-//sendToLineChart.on('click', function() {
-//
-//    console.log('Perform data push to line chart.');
-//    console.log('Remember to set this button as selectable whenever the user updates thes states.');
-//
-//    if (sendToLineChart.attr('class') == 'selectable') {
-//
-//        sendToLineChart.attr('class', 'selected');
-//        sendToLineChart.attr('fill', col_white);
-//        sendToLineChart.attr('opacity', 1);
-//
-//        selectStatesButton.attr('class', 'selectable');
-//        selectStatesButton.attr('opacity', 0.5);
-//        selectStatesButton.attr('fill', col_orange);
-//
-//        mouseButton.attr('class', 'selectable');
-//        mouseButton.attr('opacity', 0.5);
-//        mouseButton.attr('fill', col_orange);
-//
-//    } else {
-//
-//    }
-//});

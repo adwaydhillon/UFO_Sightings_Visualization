@@ -17,17 +17,6 @@ with open('data/dataCSV.csv', 'rU') as csvfile:
     table_data.append({'name': 'Disk', 'data': []});
     table_data.append({'name': 'Changing', 'data': []});
     
-#    table_data.append(['Fireball'])
-#    table_data.append(['Formation'])
-#    table_data.append(['Light'])
-#    table_data.append(['Circle'])
-#    table_data.append(['Chevron'])
-#    table_data.append(['Egg'])
-#    table_data.append(['Diamond'])
-#    table_data.append(['Cylinder'])
-#    table_data.append(['Disk'])
-#    table_data.append(['Changing'])
-    
     for x in range(0, 365):
         table_data[0]['data'].append(0);
         table_data[1]['data'].append(0);

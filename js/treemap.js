@@ -270,11 +270,9 @@ function read_csv() {
       url: "test.py",
       success: function(response) {
      // here you do whatever you want with the response variable
+    // will edit
    }
 });
-      // console.log("yep");
-      // console.log(JSON.stringify(data));
-    //writeJSON([data]);
     });
 }
 

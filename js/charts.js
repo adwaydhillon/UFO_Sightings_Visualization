@@ -71,17 +71,17 @@ var options = {
             borderWidth: 0,
             dataLabels: {
                 enabled: false
+            },
+            events: {
+                legendItemClick: function (event) {
+                    var XYZ = $('#donut_chart').highcharts(),
+                        point = XYZ.get(this.options.id); //get corresponding series
+
+                    if (point) {
+                         point.setVisible(!this.visible);
+                    }
+                }
             }
-//            events: {
-//                legendItemClick: function (event) {
-//                    var XYZ = $('#donut_chart').highcharts(),
-//                        point = XYZ.get(this.options.id); //get corresponding series
-//
-//                    if (point) {
-//                         point.setVisible(!this.visible);
-//                    }
-//                }
-//            }
         },
         pie: {
             plotBorderWidth: 0,
@@ -138,7 +138,7 @@ var chart2 = new Highcharts.Chart(options2);
 
 // Column chart
 options.chart.renderTo = 'main_chart_container';
-options.chart.type = 'scatter';
+options.chart.type = 'line';
 options.chart.zoomType = 'xy';
 var chart1 = new Highcharts.Chart(options);
 

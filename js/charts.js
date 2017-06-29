@@ -18,6 +18,9 @@ var options = {
     credits: {
         enabled: false
     },
+    pane: {
+        size: '100%'
+    },
     subtitle: {
             text: 'Year of 2016'
     },
@@ -33,7 +36,10 @@ var options = {
             title: {
                 margin: 10,
                 text: 'No. of Sightings'
-            },      
+            },
+            gridLineInterpolation: '',
+            lineWidth: 0,
+            min: 0
     },
     legend: {
         width: 0,
@@ -71,17 +77,17 @@ var options = {
             borderWidth: 0,
             dataLabels: {
                 enabled: false
-            },
-            events: {
-                legendItemClick: function (event) {
-                    var XYZ = $('#donut_chart').highcharts(),
-                        point = XYZ.get(this.options.id); //get corresponding series
-
-                    if (point) {
-                         point.setVisible(!this.visible);
-                    }
-                }
             }
+//            events: {
+//                legendItemClick: function (event) {
+//                    var XYZ = $('#donut_chart').highcharts(),
+//                        point = XYZ.get(this.options.id); //get corresponding series
+//
+//                    if (point) {
+//                         point.setVisible(!this.visible);
+//                    }
+//                }
+//            }
         },
         pie: {
             plotBorderWidth: 0,
@@ -199,14 +205,18 @@ var chart1 = new Highcharts.Chart(options);
         console.log(options);
         options.chart.renderTo = 'main_chart_container';
         options.chart.polar = true;
+        options.pane.size = '100%';
         options.chart.type = 'line';
         options.xAxis.categories = ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'];
+        options.xAxis.title.text = '';
+        options.yAxis.title.text = '';
         options.yAxis.gridLineInterpolation = 'polygon';
+        options.yAxis.lineWidth = '0';
+        options.yAxis.min = '0';
         options.title.text = 'Daily UFO Sightings';
         options.series = quarterly_json;
         var chart1 = new Highcharts.Chart(options);
     });
-
 
 });
 });

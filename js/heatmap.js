@@ -1,8 +1,8 @@
 var col_orange = "#E66A39",
-    col_red    = "#D04E33",
-    col_gray  = "#353C3E",
-    col_black   = "#1C2021",
-    col_white  = "#EEEEEE";
+    col_red = "#D04E33",
+    col_gray = "#353C3E",
+    col_black = "#1C2021",
+    col_white = "#EEEEEE";
 
 //Global Variables
 var mode = "mouse";         //Available modes: 'mouse' or 'select'
@@ -245,7 +245,7 @@ function getNavBar_html(data) {
     var state = US_states_dict[data.State];
     
     setTimeout(function() {
-            var keyword_string = data.Shape + " shaped UFO Sighting in " + state + " " + data.City;
+            var keyword_string = "UFO Sighting in " + state + " " + data.City;
             var video_id = '';
         
         //YOUTUBE SEARCH API LOAD
@@ -266,7 +266,6 @@ function getNavBar_html(data) {
                         video_id = json.items[0].id.videoId;
                         var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
                         var html_str = video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + state + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
-                        //return html_str;
                         $('#mySidenav').append(html_str);
                 });  
             });

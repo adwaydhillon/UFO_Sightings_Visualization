@@ -18,8 +18,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <!-- Load c3.css -->
-    <link href="libs/c3/c3.css" rel="stylesheet">
     <!-- Load d3.js -->
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -35,35 +33,25 @@
     </div>
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-    <div id="main">  
-<!--        <div class="wrapper">-->
-        
+    <div id="main">          
             <div id = "top_half">
                 <div id="heatmap"></div>
                 <div id="treemap"></div> 
             </div><br>
             <div id = "bottom_half">
-<!--                        <div class = "button_container">-->
                             <br>
                             <button type="button" class="btn btn-success btn-xs" id="bar_button">BAR</button>
                             <button type="button" class="btn btn-success btn-xs" id="stacked_bar_button">STACKED BAR</button>
                             <button type="button" class="btn btn-success btn-xs" id="curve_button">TREND</button>
                             <button type="button" class="btn btn-success btn-xs" id="scatter_button">SCATTER</button>
                             <button type="button" class="btn btn-success btn-xs" id="spider_button">SPIDER</button><br>
-
-<!--                        </div>-->
                         <div id="main_chart_container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
-                        <div id="donut_chart" style="min-width: 50px; height: 300px; margin: 0 auto"></div>
-                        
+                        <div id="donut_chart" style="min-width: 50px; height: 300px; margin: 0 auto"></div>   
                 </div> 
             </div>
         </div>
-<!--    </div>-->
 <script src="js/heatmap.js"></script>
 <script src="js/treemap.js"></script>
-<!--<script src="js/linechart.js"></script>-->
-<script src="js/auth.js"></script>
-<script src="js/search.js"></script>
 <script src="js/charts.js"></script>
 <script src="js/themes/dark-unica.js"></script>
 </body>

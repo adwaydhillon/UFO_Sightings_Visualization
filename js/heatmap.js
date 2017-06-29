@@ -178,21 +178,18 @@ function deselectStates() {
     selectedStates = [];
 }
 
-function googleApiClientReady(keyword_string) {
-                console.log("api called");
-                var video_id = '';
+function getNavBar_html(data) {
+    var video_id = '';
+    
+    setTimeout(function() {
+            var keyword_string = "UFO Sighting " + data.State + " " + data.City;
+            var video_id = '';
+        
+        //YOUTUBE SEARCH API LOAD
                 gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');
                 gapi.client.load('youtube', 'v3', function() {
-                      video_id = searchA(keyword_string);
-                });
-                return video_id;
-        }
-
-function searchA(keyword_string) {
-    
-                var video_id = '';
-                var q = keyword_string;
-                var request = gapi.client.youtube.search.list({
+                        var q = keyword_string;
+                        var request = gapi.client.youtube.search.list({
                         q: q, 
                         part: 'snippet',
                         maxResults: '1',
@@ -204,39 +201,21 @@ function searchA(keyword_string) {
                         var str = JSON.stringify(response.result);
                         var json = response.result;
                         video_id = json.items[0].id.videoId;
-                        console.log(video_id);
-                });
-                return video_id;
-        }
-
-function getNavBar_html(data) {
-    var video_id = '';
-    
-    setTimeout(function() {
-            var keyword_string = "UFO Sighting " + data.State + " " + data.City;
-            var video_id = '';
-                gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');
-                gapi.client.load('youtube', 'v3', function() {
-                      console.log("api loaded");
-                      video_id = searchA(keyword_string);
-                });
-//            video_id = googleApiClientReady(keyword);
-            
-              }, 3000);
-    
-    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
-    
-//    var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/o_LGuUXXGfk" frameborder="0" allowfullscreen></iframe>';
-    
-    var html_str = video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
-    return html_str;
+                        var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
+                        var html_str = video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + data.State + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
+                        //return html_str;
+                        $('#mySidenav').append(html_str);
+                });  
+            });
+        }, 100);
 }
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav(data) {
     document.getElementById("mySidenav").style.width = "500px";
-    var html_content = getNavBar_html(data);
-    $('#mySidenav').append(html_content);
+    //var html_content = 
+    getNavBar_html(data);
+    //$('#mySidenav').append(html_content);
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }

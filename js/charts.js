@@ -26,7 +26,6 @@ var options = {
     },
     xAxis: {
             type: 'category',
-//            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         title: {
                 margin: 10,
                 text: 'Days of the Year'
@@ -152,6 +151,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.renderTo = 'main_chart_container';
         options.chart.type = 'column';
         options.legend.itemStyle.cursor = 'pointer';
+        options.chart.zoomType = 'xy';
         options.chart.polar = false;
         options.plotOptions.column.stacking = '';
         options.title.text = 'Monthly UFO Sightings';
@@ -167,6 +167,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.type = 'spline';
         options.chart.polar = false;
         options.plotOptions.column.stacking = '';
+        options.chart.zoomType = 'xy';
         options.title.text = 'Monthly UFO Sightings';
         options.xAxis.categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         options.xAxis.title.margin = 10;
@@ -180,6 +181,7 @@ var chart1 = new Highcharts.Chart(options);
         options.plotOptions.column.stacking = '';
         options.chart.type = 'scatter';
         options.chart.polar = false;
+        options.chart.zoomType = 'xy';
         options.xAxis.title.margin = 10;
         options.xAxis.title.text = 'Days of the Year';
         options.xAxis.categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -193,6 +195,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.type = 'column';
         options.chart.polar = false;
         options.plotOptions.column.stacking = 'normal';
+        options.chart.zoomType = 'xy';
         options.xAxis.title.margin = 10;
         options.xAxis.title.text = 'Months of the Year';
         options.xAxis.categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -206,6 +209,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.renderTo = 'main_chart_container';
         options.chart.polar = true;
         options.pane.size = '100%';
+        options.chart.zoomType = 'xy';
         options.chart.type = 'line';
         options.xAxis.categories = ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'];
         options.xAxis.title.text = '';

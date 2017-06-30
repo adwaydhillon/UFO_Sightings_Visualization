@@ -33,9 +33,7 @@ var options2 = {
                 dataLabels: {
                     enabled: true
                 },
-                showInLegend: true,
-                startAngle: -90,
-                endAngle: 90,
+                showInLegend: true
             }
         },
         series: pie_json
@@ -99,21 +97,20 @@ var options = {
             },
             events: {
                     legendItemClick: function (event) {
-                        console.log(this.options.name);
                         var donut = $('#donut_chart').highcharts(),
                             series_arr = donut.series[0].data;
-//                            series = donut.get(this.options.name); //get corresponding series
-                        console.log(series_arr);
-                        for (series in series_arr) {
-                            if (this.options.name === series.name) {
-                                if (this.visible) {
-                                series.visible = true;
-                            } else {
-                                series.visible = false;
+                            for (series in series_arr) {
+                                if (this.options.name === series_arr[series].name) {
+                                    if (this.visible) {
+                                        series_arr[series].setVisible(false);
+                                    } else {
+                                        series_arr[series].setVisible(true);
+
+                                    }
+
+                                }
                             }
-                        }
                     }
-                }
             }
         }
     },
@@ -180,7 +177,7 @@ var gaugeOptions = {
                    '<span style="font-size:12px;color:silver">km/h</span></div>'
         },
         tooltip: {
-            valueSuffix: ' km/h'
+            valueSuffix: ' mph'
         }
     }],
     plotOptions: {

@@ -55,15 +55,6 @@ heading {
     .sidenav a {font-size: 18px;}
 }
 
-/*
-#wrapper{
-    width: 100%;
-    position: relative;
-    height: 100%;
-    overflow: hidden;  contain floated elements 
-    background: #353C3E;
-}
-*/
 
 #top_half {
     width: 100%;
@@ -90,13 +81,6 @@ heading {
     overflow: hidden; /* contain floated elements */
     background: #2a2a2b;
     display: inline-block;
-}
-
-#c3_stuff {
-    height: 80%;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
 
 #heatmap {

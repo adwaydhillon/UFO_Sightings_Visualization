@@ -76,7 +76,6 @@ function main(o, data) {
     
     function initialize(root) {
         if (root != null) {
-            console.log(root);
             root.x = root.y = 0;
             root.dx = width;
             root.dy = height;

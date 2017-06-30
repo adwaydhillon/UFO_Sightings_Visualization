@@ -7,104 +7,6 @@ d3.json("data/scatter_highcharts_data.json", function(daily_json) {
 d3.json("data/monthly_highcharts_data.json", function(monthly_json) {
     
 d3.json("data/quarterly_highcharts_data.json", function(quarterly_json) {
-var options = {
-    chart: {
-        polar: false,
-        plotBorderWidth: 0
-    },
-    title: {
-        text: 'Daily UFO Sightings',
-    },
-    credits: {
-        enabled: false
-    },
-    pane: {
-        size: '100%'
-    },
-    subtitle: {
-            text: 'Year of 2016'
-    },
-    xAxis: {
-            type: 'category',
-        title: {
-                margin: 10,
-                text: 'Days of the Year'
-            }
-    },
-    yAxis: {
-            title: {
-                margin: 10,
-                text: 'No. of Sightings'
-            },
-            gridLineInterpolation: '',
-            lineWidth: 0,
-            min: 0
-    },
-    legend: {
-        width: 0,
-        enabled: true,
-        itemStyle: {
-            	'cursor': 'pointer'
-            }
-    },
-    plotOptions: {
-        series: {
-          events: { 
-                        legendItemClick: function(){
-                        var index = this.index,
-                        chart = this.chart,
-                        series = chart.series,
-                        len = series.length,
-                        pieSerie = series[len-1];
-                        pieSerie.data[index].setVisible();
-                     }
-                 }  
-        },
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                    enabled: true
-                },
-                showInLegend: true
-        },
-        column: {
-            stacking: ''
-        },
-        series: {
-            pointPadding: 0.2,
-            borderWidth: 0,
-            dataLabels: {
-                enabled: false
-            }
-//            events: {
-//                legendItemClick: function (event) {
-//                    var XYZ = $('#donut_chart').highcharts(),
-//                        point = XYZ.get(this.options.id); //get corresponding series
-//
-//                    if (point) {
-//                         point.setVisible(!this.visible);
-//                    }
-//                }
-//            }
-        },
-        pie: {
-            plotBorderWidth: 0,
-            allowPointSelect: true,
-            cursor: 'pointer',
-            size: '100%',
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}: <b>{point.y}</b>'
-            }
-        }
-    },
-    series: daily_json,
-    drilldown: {
-        series: []
-    }
-};
-    
 var options2 = {
     chart: {
             plotBackgroundColor: null,
@@ -139,7 +41,87 @@ var options2 = {
     
 options2.chart.renderTo = 'donut_chart';
 options2.chart.type = 'pie';
-var chart2 = new Highcharts.Chart(options2);
+var chart2 = new Highcharts.Chart(options2);    
+    
+    
+var options = {
+    chart: {
+        polar: false,
+        plotBorderWidth: 0
+    },
+    title: {
+        text: 'Daily UFO Sightings',
+    },
+    credits: {
+        enabled: false
+    },
+    size: '100%',
+    pane: {
+        size: '100%'
+    },
+    subtitle: {
+            text: 'Year of 2016'
+    },
+    xAxis: {
+            type: 'category',
+        title: {
+                margin: 10,
+                text: 'Days of the Year'
+            }
+    },
+    yAxis: {
+            title: {
+                margin: 10,
+                text: 'No. of Sightings'
+            },
+            gridLineInterpolation: '',
+            lineWidth: 0,
+            min: 0
+    },
+    legend: {
+        width: 0,
+        enabled: true,
+        itemStyle: {
+            	'cursor': 'pointer'
+            }
+    },
+    plotOptions: {
+        column: {
+            stacking: ''
+        },
+        series: {
+            pointPadding: 0.2,
+            borderWidth: 0,
+            dataLabels: {
+                enabled: false
+            },
+            events: {
+                    legendItemClick: function (event) {
+                        console.log(this.options.name);
+                        var donut = $('#donut_chart').highcharts(),
+                            series_arr = donut.series[0].data;
+//                            series = donut.get(this.options.name); //get corresponding series
+                        console.log(series_arr);
+                        for (series in series_arr) {
+                            if (this.options.name === series.name) {
+                                if (this.visible) {
+                                series.visible = true;
+                            } else {
+                                series.visible = false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    series: daily_json,
+    drilldown: {
+        series: []
+    }
+};
+    
+
 
 // Column chart
 options.chart.animation = false;
@@ -210,7 +192,6 @@ var chart1 = new Highcharts.Chart(options);
     });
     
     $('#spider_button').on('click', function () {
-        console.log(options);
         options.chart.renderTo = 'main_chart_container';
         options.chart.polar = true;
         options.pane.size = '100%';

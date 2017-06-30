@@ -98,25 +98,39 @@ heading {
     color: white;
 }
 
-#button_container {
-    float: left;
-    height: 100%;
-    color: #353C3E;
-}
-
 #main_chart_container {
     width: 70%;
     float: left;
+    position: absolute;
+    display: inline-block;
     height: 100%;
     color: #353C3E;
 }
 
-#donut_chart {
+#pies {
     width: 30%;
     float: right;
     height: 100%;
     color: #353C3E;
     padding-right: 20px;
+}
+
+#gauge_chart {
+    width: 100%;
+    top: 0;
+    height: 50%;
+    color: #353C3E;
+}
+
+#donut_chart {
+    width: 100%;
+    bottom: 0;
+    height: 50%;
+    color: #353C3E;
+}
+
+.highcharts-yaxis-grid .highcharts-grid-line {
+	display: none;
 }
 
 html, body{

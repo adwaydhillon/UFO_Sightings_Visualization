@@ -128,7 +128,9 @@ var gaugeOptions = {
         type: 'solidgauge',
         renderTo: 'gauge_chart'
     },
-    title: null,
+    title: {
+        text: 'Recorded Speed of UFOs'
+    },
     pane: {
         center: ['50%', '85%'],
         size: '140%',
@@ -192,37 +194,8 @@ var gaugeOptions = {
     }
 };
     
-// The speed gauge
-//var chartSpeed = Highcharts.chart('gauge_chart', Highcharts.merge(gaugeOptions, {
-//    yAxis: {
-//        min: 0,
-//        max: 200,
-//        title: {
-//            text: 'Speed'
-//        }
-//    },
-//
-//    credits: {
-//        enabled: false
-//    },
-//
-//    series: [{
-//        name: 'Speed',
-//        data: [80],
-//        dataLabels: {
-//            format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-//                ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-//                   '<span style="font-size:12px;color:silver">km/h</span></div>'
-//        },
-//        tooltip: {
-//            valueSuffix: ' km/h'
-//        }
-//    }]
-//
-//}));
-    
 gaugeOptions.chart.renderTo = 'gauge_chart';
-gaugeOptions.chart.type = 'gauge';
+gaugeOptions.chart.type = 'solidgauge';
 var chartSpeed = new Highcharts.Chart(gaugeOptions);
 
 

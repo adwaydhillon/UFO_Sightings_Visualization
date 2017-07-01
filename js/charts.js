@@ -128,7 +128,7 @@ var gaugeOptions = {
         renderTo: 'gauge_chart'
     },
     title: {
-        text: 'Recorded Speed of UFOs'
+        text: 'Recorded Speeds of UFOs'
     },
     pane: {
         center: ['50%', '85%'],

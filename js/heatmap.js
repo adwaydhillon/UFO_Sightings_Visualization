@@ -245,8 +245,10 @@ function getNavBar_html(data) {
     var state = US_states_dict[data.State];
     
     setTimeout(function() {
-            var keyword_string = "UFO Sighting in " + state + " " + data.City;
+            var keyword_string = "UFO Sighting in " + state + " " + data.Shape;
             var video_id = '';
+            document.getElementById("mySidenav").innerHTML = "";
+            //$('#mySidenav').innerHTML = "<a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>";
         
         //YOUTUBE SEARCH API LOAD
                 gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');
@@ -265,7 +267,7 @@ function getNavBar_html(data) {
                         var json = response.result;
                         video_id = json.items[0].id.videoId;
                         var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
-                        var html_str = video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + state + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
+                        var html_str = "<a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>" + video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + state + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
                         $('#mySidenav').append(html_str);
                 });  
             });
@@ -275,15 +277,14 @@ function getNavBar_html(data) {
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav(data) {
     document.getElementById("mySidenav").style.width = "500px";
-    //var html_content = 
     getNavBar_html(data);
-    //$('#mySidenav').append(html_content);
     document.getElementById("main").style.marginLeft = "250px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
+    
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
     document.body.style.backgroundColor = "#2a2a2b";

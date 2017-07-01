@@ -278,23 +278,17 @@ function getNavBar_html(data) {
 function openNav(data) {
     document.getElementById("mySidenav").style.width = "500px";
     getNavBar_html(data);
-    document.getElementById("main").style.marginLeft = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    document.getElementById("main").style.marginLeft = "500px";
+    document.body.style.backgroundColor = "rgba(0,0,0)";
+    document.getElementById("main").style.opacity = "0.2";
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
 function closeNav() {
-    
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
     document.body.style.backgroundColor = "#2a2a2b";
-}
-
-function roundDecimal(coordinate) {
-    var old_str = parseFloat(coordinate).toString();
-    arr = old_str.split(".");
-    var new_str = arr[0] + "." + arr[1].substring(0,2);
-    return Number(new_str);
+    document.getElementById("main").style.opacity = "1";
 }
 
 function get_info_on_sighting(sighting_coordinates) {

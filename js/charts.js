@@ -4,6 +4,8 @@ d3.json("data/pie_highcharts_data.json", function(pie_json) {
     
 d3.json("data/scatter_highcharts_data.json", function(daily_json) {
     
+d3.json("data/gauge_highcharts_data.json", function(speed_json) {
+    
 d3.json("data/monthly_highcharts_data.json", function(monthly_json) {
     
 d3.json("data/quarterly_highcharts_data.json", function(quarterly_json) {
@@ -149,14 +151,14 @@ var gaugeOptions = {
     // the value axis
     yAxis: {
         min: 0,
-        max: 200,
+        max: 1400,
         title: {
             text: 'Speed'
         },
         stops: [
-            [0.1, '#55BF3B'], // green
+            [0.2, '#55BF3B'], // green
             [0.5, '#DDDF0D'], // yellow
-            [0.9, '#DF5353'] // red
+            [0.7, '#DF5353'] // red
         ],
         lineWidth: 0,
         minorTickInterval: null,
@@ -170,11 +172,11 @@ var gaugeOptions = {
     },
     series: [{
         name: 'Speed',
-        data: [80],
+        data: [Number(speed_json[speed_json.length - 5])],
         dataLabels: {
             format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                 ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y}</span><br/>' +
-                   '<span style="font-size:12px;color:silver">km/h</span></div>'
+                   '<span style="font-size:12px;color:silver">mph</span></div>'
         },
         tooltip: {
             valueSuffix: ' mph'
@@ -193,28 +195,34 @@ var gaugeOptions = {
     
 gaugeOptions.chart.renderTo = 'gauge_chart';
 gaugeOptions.chart.type = 'solidgauge';
+gaugeOptions.series[0].tooltip.valueSuffix = " mpg";
 var chartSpeed = new Highcharts.Chart(gaugeOptions);
 
-
+var inc = 0;
 // Bring life to the dials
 setInterval(function () {
     // Speed
     var point,
-        newVal,
-        inc;
-
-    if (chartSpeed) {
-        point = chartSpeed.series[0].points[0];
-        inc = Math.round((Math.random() - 0.5) * 100);
-        newVal = point.y + inc;
-
-        if (newVal < 0 || newVal > 200) {
-            newVal = point.y - inc;
+        newVal;
+    if (inc == speed_json.length) {
+            inc = 0;
         }
+    //ajax call to dynamically run the python script on the backend 
+    $.ajax({
+       url: "../scripts/getGaugeInfo.py",
+       success: function(response) {
+         // here you do whatever you want with the response variable
+        if (chartSpeed) {
+            point = chartSpeed.series[0].points[0];
+            newVal = speed_json[inc];
+            point.update(Number(newVal));
+            inc += 1; 
+        }
+       }
+    });
 
-        point.update(newVal);
-    }
-}, 2000);
+    
+}, 1500);
 
     
 
@@ -305,6 +313,7 @@ var chart1 = new Highcharts.Chart(options);
         var chart1 = new Highcharts.Chart(options);
     });
 
+});
 });
 });
 });

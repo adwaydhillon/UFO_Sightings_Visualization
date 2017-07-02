@@ -241,6 +241,7 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.renderTo = 'main_chart_container';
         options.chart.animation = true;
         options.chart.type = 'column';
+        options.plotOptions.column.series.pointStart = 0;
         options.legend.itemStyle.cursor = 'pointer';
         options.chart.zoomType = 'xy';
         options.chart.polar = false;

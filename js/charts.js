@@ -89,7 +89,10 @@ var options = {
     },
     plotOptions: {
         column: {
-            stacking: ''
+            stacking: '',
+            series: {
+            pointStart: 0
+            }
         },
         series: {
             pointPadding: 0.2,
@@ -195,7 +198,7 @@ var gaugeOptions = {
     
 gaugeOptions.chart.renderTo = 'gauge_chart';
 gaugeOptions.chart.type = 'solidgauge';
-gaugeOptions.series[0].tooltip.valueSuffix = " mpg";
+gaugeOptions.series[0].tooltip.valueSuffix = " mph";
 var chartSpeed = new Highcharts.Chart(gaugeOptions);
 
 var inc = 0;

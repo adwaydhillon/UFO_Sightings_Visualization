@@ -278,7 +278,11 @@ var chart1 = new Highcharts.Chart(options);
         options.chart.zoomType = 'xy';
         options.xAxis.title.margin = 10;
         options.xAxis.title.text = 'Days of the Year';
-        options.xAxis.categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        xTickMarkArr = [];
+        for (var i = 0; i <= 366; i++) {
+            xTickMarkArr.push(String(i));
+        }
+        options.xAxis.categories = xTickMarkArr;
         options.title.text = 'Daily UFO Sightings';
         options.series = daily_json;
         var chart1 = new Highcharts.Chart(options);

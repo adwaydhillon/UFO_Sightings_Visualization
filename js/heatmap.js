@@ -136,13 +136,13 @@ function select(d) {
     if (mode == 'select') {
 
         //Make Send Buttons Selectable Here Rather Than on click of select button.
-        sendToBarChart.attr('class', 'selectable');
-        sendToBarChart.attr('opacity', 0.5);
-        sendToBarChart.attr('fill', col_orange);
-
-        sendToLineChart.attr('class', 'selectable');
-        sendToLineChart.attr('opacity', 0.5);
-        sendToLineChart.attr('fill', col_orange);
+//        sendToBarChart.attr('class', 'selectable');
+//        sendToBarChart.attr('opacity', 0.5);
+//        sendToBarChart.attr('fill', col_orange);
+//
+//        sendToLineChart.attr('class', 'selectable');
+//        sendToLineChart.attr('opacity', 0.5);
+//        sendToLineChart.attr('fill', col_orange);
 
         this.isSelected = 'true';
 
@@ -158,25 +158,25 @@ function select(d) {
     }
 }
 
-var pushableData = [];
-function combineData() {
-    pushableData = [];
-    for (var i = 0; i < selectedStates.length; i++) {
-        var newState = selectedStates[i];
-        var newSighting = window.statesHashmap[newState.toUpperCase()];
-        var newItem = {State: newState, Sightings: newSighting}
-        pushableData.push(newItem)
-    }
-    console.log(pushableData);
-}
-
-function deselectStates() {
-    states.style("fill", function(d) {
-        console.log(this.id);
-        this.isSelected = 'false'
-        return heatmap(Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1)); });
-    selectedStates = [];
-}
+//var pushableData = [];
+//function combineData() {
+//    pushableData = [];
+//    for (var i = 0; i < selectedStates.length; i++) {
+//        var newState = selectedStates[i];
+//        var newSighting = window.statesHashmap[newState.toUpperCase()];
+//        var newItem = {State: newState, Sightings: newSighting}
+//        pushableData.push(newItem)
+//    }
+//    console.log(pushableData);
+//}
+//
+//function deselectStates() {
+//    states.style("fill", function(d) {
+//        console.log(this.id);
+//        this.isSelected = 'false'
+//        return heatmap(Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1)); });
+//    selectedStates = [];
+//}
 
 function getNavBar_html(data) {
     US_states_dict = {
@@ -355,6 +355,7 @@ function click(d) {
                 return d.properties.abbr;
             })
             .classed("active", false);
+        
         if (centered) {
             g.select("#label-" + centered.properties.abbr)
                 .text(function (d) {
@@ -363,7 +364,7 @@ function click(d) {
                 .classed("active", centered && function (d) {
                         return d === centered;
                     });
-
+console.log(statesCoord);
         // SHOW COORDINATES ON ZOOM IN
                 g.selectAll("circle")
                 .data(statesCoord[d.properties.abbr.toUpperCase()]).enter()

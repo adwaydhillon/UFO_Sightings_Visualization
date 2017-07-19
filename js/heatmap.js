@@ -364,7 +364,6 @@ function click(d) {
                 .classed("active", centered && function (d) {
                         return d === centered;
                     });
-console.log(statesCoord);
         // SHOW COORDINATES ON ZOOM IN
                 g.selectAll("circle")
                 .data(statesCoord[d.properties.abbr.toUpperCase()]).enter()

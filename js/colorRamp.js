@@ -28,7 +28,7 @@ var svg = d3.select('#trafficAccidents')
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 //Reset the overall font size
-var newFontSize = width * 62.5 / 500;
+var newFontSize = width * 62.5 / 300;
 d3.select("html").style("font-size", newFontSize + "%");
 
 ///////////////////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ var accidents=[{day:2,hour:1,count:527},{day:4,hour:1,count:1}];
 
 var colorScale = d3.scale.linear()
 	.domain([0, d3.max(accidents, function(d) {console.log(d.count);return d.count; })/2, d3.max(accidents, function(d) {return d.count; })])
-	.range(["#d2998d", "#f46b4e", "#f25635"])
+	.range(["#d2998d", "#f05c3c", "#f25635"])
 	.interpolate(d3.interpolateHcl);
 
 ///////////////////////////////////////////////////////////////////////////

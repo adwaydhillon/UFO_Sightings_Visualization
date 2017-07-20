@@ -28,7 +28,6 @@ var svg = d3.select("#heatmap").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-
 var g = svg.append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
   .append("g")
@@ -134,16 +133,6 @@ var selectedStates = [];
 
 function select(d) {
     if (mode == 'select') {
-
-        //Make Send Buttons Selectable Here Rather Than on click of select button.
-//        sendToBarChart.attr('class', 'selectable');
-//        sendToBarChart.attr('opacity', 0.5);
-//        sendToBarChart.attr('fill', col_orange);
-//
-//        sendToLineChart.attr('class', 'selectable');
-//        sendToLineChart.attr('opacity', 0.5);
-//        sendToLineChart.attr('fill', col_orange);
-
         this.isSelected = 'true';
 
         if (this.isSelected == 'true') {
@@ -157,26 +146,6 @@ function select(d) {
         }
     }
 }
-
-//var pushableData = [];
-//function combineData() {
-//    pushableData = [];
-//    for (var i = 0; i < selectedStates.length; i++) {
-//        var newState = selectedStates[i];
-//        var newSighting = window.statesHashmap[newState.toUpperCase()];
-//        var newItem = {State: newState, Sightings: newSighting}
-//        pushableData.push(newItem)
-//    }
-//    console.log(pushableData);
-//}
-//
-//function deselectStates() {
-//    states.style("fill", function(d) {
-//        console.log(this.id);
-//        this.isSelected = 'false'
-//        return heatmap(Math.log(window.statesHashmap[d.properties.abbr.toUpperCase()] || 1)); });
-//    selectedStates = [];
-//}
 
 function getNavBar_html(data) {
     US_states_dict = {
@@ -248,7 +217,6 @@ function getNavBar_html(data) {
             var keyword_string = "UFO Sighting in " + state + " " + data.Shape;
             var video_id = '';
             document.getElementById("mySidenav").innerHTML = "";
-            //$('#mySidenav').innerHTML = "<a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>";
         
         //YOUTUBE SEARCH API LOAD
                 gapi.client.setApiKey('AIzaSyDLgsPbi8g3rIdgadiiFlIfP2ttAHnfJU8');

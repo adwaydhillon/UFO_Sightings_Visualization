@@ -38,7 +38,7 @@ d3.select("html").style("font-size", newFontSize + "%");
 var accidents=[{day:2,hour:1,count:527},{day:4,hour:1,count:1}];
 
 var colorScale = d3.scale.linear()
-	.domain([0, d3.max(accidents, function(d) {console.log(d.count);return d.count; })/2, d3.max(accidents, function(d) {return d.count; })])
+	.domain([0, d3.max(accidents, function(d) {return d.count; })/2, d3.max(accidents, function(d) {return d.count; })])
 	.range(["#d2998d", "#f05c3c", "#BB432A"])
 	.interpolate(d3.interpolateHcl);
 

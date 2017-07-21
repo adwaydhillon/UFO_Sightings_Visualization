@@ -301,7 +301,7 @@ Highcharts.chart('container', {
         style: {
             fontSize: '16px'
         },
-        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}sec</span>',
+        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y} sec</span>',
         positioner: function (labelWidth) {
             return {
                 x: 200 - labelWidth / 2,

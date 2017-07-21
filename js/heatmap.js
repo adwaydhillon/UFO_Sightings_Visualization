@@ -257,7 +257,7 @@ function getNavBar_html(data) {
 <script type="text/javascript">
 // Uncomment to style it like Apple Watch
 
-//if (!Highcharts.theme) {
+if (!Highcharts.theme) {
     Highcharts.setOptions({
         chart: {
             backgroundColor: '#111'
@@ -277,16 +277,19 @@ function getNavBar_html(data) {
             }
         }
     });
-//}
+}
 // 
 
 Highcharts.chart('container', {
 
     chart: {
+        backgroundColor: '#111',
         type: 'solidgauge',
         marginTop: 50
     },
-
+    credits: {
+            enabled: false
+        },
     title: {
         text: 'Sighting Activity',
         style: {

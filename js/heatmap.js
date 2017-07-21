@@ -136,11 +136,8 @@ function select(d) {
         this.isSelected = 'true';
 
         if (this.isSelected == 'true') {
-            console.log(this.style.fill);
             this.style.fill = col_white;
         }
-        console.log(this.isSelected);
-        console.log('Selected State: ' + this.id);
         if (selectedStates.indexOf(this.id) < 0) {
             selectedStates.push(this.id);
         }
@@ -210,6 +207,29 @@ function getNavBar_html(data) {
     "WY": "Wyoming"
 }
     
+    var in_out = 80;
+    var drift = 65;
+    var stand = 50;
+    
+    d3.csv("data/dataCSV.csv",
+    function(d){
+        return{
+            State : d.State,
+            lat : +d.lat,
+            lng : +d.lng,
+            activity: d.Activity,
+            city: d.City
+        };
+    }, function(dataa){
+        for (var i = 0; i < dataa.length; i++) {
+            if (dataa[i].city === data.City) {
+                in_out = dataa[i].activity.split(":")[0];
+                drift = dataa[i].activity.split(":")[1];
+                stand = dataa[i].activity.split(":")[2];
+            }
+        } 
+    });
+
     var video_id = '';
     var state = US_states_dict[data.State];
     
@@ -231,11 +251,186 @@ function getNavBar_html(data) {
                         videoEmbeddable: 'true'
                 });
                 request.execute(function(response) {
+                        var activity_html = `<div id="container" style="width: 400px; height: 400px; margin: 0 auto">
+</div>
+
+<script type="text/javascript">
+// Uncomment to style it like Apple Watch
+
+//if (!Highcharts.theme) {
+    Highcharts.setOptions({
+        chart: {
+            backgroundColor: '#111'
+        },
+        credits: {
+            enabled: false
+        },
+        colors: ['#F62366', '#9DFF02', '#0CCDD6'],
+        title: {
+            style: {
+                color: 'silver'
+            }
+        },
+        tooltip: {
+            style: {
+                color: 'silver'
+            }
+        }
+    });
+//}
+// 
+
+Highcharts.chart('container', {
+
+    chart: {
+        type: 'solidgauge',
+        marginTop: 50
+    },
+
+    title: {
+        text: 'Sighting Activity',
+        style: {
+            fontSize: '24px'
+        }
+    },
+
+    tooltip: {
+        borderWidth: 0,
+        backgroundColor: 'none',
+        shadow: false,
+        style: {
+            fontSize: '16px'
+        },
+        pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}sec</span>',
+        positioner: function (labelWidth) {
+            return {
+                x: 200 - labelWidth / 2,
+                y: 180
+            };
+        }
+    },
+
+    pane: {
+        startAngle: 0,
+        endAngle: 360,
+        background: [{ // Track for Move
+            outerRadius: '112%',
+            innerRadius: '88%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Exercise
+            outerRadius: '87%',
+            innerRadius: '63%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }, { // Track for Stand
+            outerRadius: '62%',
+            innerRadius: '38%',
+            backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
+                .setOpacity(0.3)
+                .get(),
+            borderWidth: 0
+        }]
+    },
+
+    yAxis: {
+        min: 0,
+        max: 100,
+        lineWidth: 0,
+        tickPositions: []
+    },
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                enabled: false
+            },
+            linecap: 'round',
+            stickyTracking: false,
+            rounded: true
+        }
+    },
+
+    series: [{
+        name: 'Fly in and out',
+        data: [{
+            color: Highcharts.getOptions().colors[0],
+            radius: '112%',
+            innerRadius: '88%',
+            y:` + in_out + `
+        }]
+    }, {
+        name: 'Drift',
+        data: [{
+            color: Highcharts.getOptions().colors[1],
+            radius: '87%',
+            innerRadius: '63%',
+            y:` + drift + `
+        }]
+    }, {
+        name: 'Stand',
+        data: [{
+            color: Highcharts.getOptions().colors[2],
+            radius: '62%',
+            innerRadius: '38%',
+            y:` + stand + `
+        }]
+    }]
+},
+
+/**
+ * In the chart load callback, add icons on top of the circular shapes
+ */
+function callback() {
+
+    // Move icon
+    this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8])
+        .attr({
+            'stroke': '#303030',
+            'stroke-linecap': 'round',
+            'stroke-linejoin': 'round',
+            'stroke-width': 2,
+            'zIndex': 10
+        })
+        .translate(190, 26)
+        .add(this.series[2].group);
+
+    // Exercise icon
+    this.renderer.path(['M', -8, 0, 'L', 8, 0, 'M', 0, -8, 'L', 8, 0, 0, 8,
+            'M', 8, -8, 'L', 16, 0, 8, 8])
+        .attr({
+            'stroke': '#ffffff',
+            'stroke-linecap': 'round',
+            'stroke-linejoin': 'round',
+            'stroke-width': 2,
+            'zIndex': 10
+        })
+        .translate(190, 61)
+        .add(this.series[2].group);
+
+    // Stand icon
+    this.renderer.path(['M', 0, 8, 'L', 0, -8, 'M', -8, 0, 'L', 0, -8, 8, 0])
+        .attr({
+            'stroke': '#303030',
+            'stroke-linecap': 'round',
+            'stroke-linejoin': 'round',
+            'stroke-width': 2,
+            'zIndex': 10
+        })
+        .translate(190, 96)
+        .add(this.series[2].group);
+});
+</script>
+`;
                         var str = JSON.stringify(response.result);
                         var json = response.result;
                         video_id = json.items[0].id.videoId;
                         var video = '<iframe width="480" height="315" src="https://www.youtube.com/embed/' + video_id + '"frameborder="0" allowfullscreen></iframe>';
-                        var html_str = "<a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>" + video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + state + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>";
+                        var html_str = "<a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>" + video + "<br><br><p><font face=\"Arial\" color=\"white\">" + "<strong>Date of Sighting: </strong>" + data.Date + "<br><strong> Time of Sighting: </strong>" + data.Time + "<br><strong> Country: </strong>" + data.Country + "<br><strong> City: </strong>" + data.City + "<br><strong> State: </strong>" + state + "<br><strong> Shape: </strong>" + data.Shape + "<br><strong> Latitude of Sighting: </strong>" + data.Lat + "<br><strong> Longitude of Sighting: </strong>" + data.Lng + "<br><br><strong> Witness Account: </strong>" + data.Summary + "</font></p>" + "<br>" + activity_html;
                         $('#mySidenav').append(html_str);
                 });  
             });
@@ -269,9 +464,11 @@ function get_info_on_sighting(sighting_coordinates) {
         clicked_lng = clicked_lng[0] + "." + clicked_lng[1].substring(0,2);
         
         clicked_lat_lng = clicked_lat + "_" + clicked_lng;
+        
         sighting_data = {};
         for (var key in d) {
             if (d.hasOwnProperty(key) && (clicked_lat_lng === key)) {
+                clicked_activity = d[key][7];
                 sighting_data.Date = d[key][0];
                 sighting_data.Time = d[key][1];
                 sighting_data.Country = d[key][2];

@@ -281,7 +281,6 @@ if (!Highcharts.theme) {
 // 
 
 Highcharts.chart('container', {
-
     chart: {
         backgroundColor: '#111',
         type: 'solidgauge',
